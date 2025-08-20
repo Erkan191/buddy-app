@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="icon" href="buddy_favicon.png" type="image/png" />
+  <link rel="stylesheet" href="buddy.css" />
+  <title>Buddy Up</title>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <!-- Logo -->
+    <div class="logo">
+      <img src="buddy_logo.png" alt="Buddy Up logo" class="logo-image">
+    </div>
+
+    <!-- Main form container -->
+    <div class="container">
+      <h1 class="text-primary">The Ultimate Buddy Generator</h1>
+      <p class="lead">Type in a name and find a buddy!</p>
+
+      <label for="name-input">Employee's Name:</label>
+      <input id="name-input" class="form-control" type="text" placeholder="Type name here" required />
+
+      <dialog id="confirm-deleteAll-dialog">
+        <form method="dialog">
+          <p>Delete all buddies?</p>
+          <div>
+            <button id="yesDelete-Modal-btn">
+              Yes
+            </button>
+            <button id="dontDeleteModal-btn">
+              No
+            </button>
+          </div>
+        </form>
+      </dialog>
+
+      <!-- <label for="team-input">Team:</label>
+        <input list="teams" id="team-input" class="form-control" type="text" placeholder="Type team here" required />
+        <datalist id="teams">
+          <option value="EO"></option>
+          <option value="NSPOC"></option>
+          <option value="LEO"></option>
+          <option value="PNT"></option>
+        </datalist> -->
+
+      <button id="add-button" class="btn btn-primary btn-block" type="submit" style="margin-top:1.5rem;">
+        <span class="glyphicon glyphicon-send"></span> Add Employee
+      </button>
+      <button id="delete-button" class="btn .btn-danger btn-block " type="submit" style="margin-top:1.5rem;">
+        <span class="glyphicon glyphicon-trash"></span> Delete Employee
+      </button>
+      </form>
+
+      <div class="buttons-row">
+        <span>Single Match</span>
+        <label class="switch">
+          <input id="switch" type="checkbox">
+          <span class="slider round"></span>
+        </label>
+        <span>Instant Pairs</span><br>
+
+        <button id="buttonGenerator" class="btn btn-success">Generate Buddy Match</button>
+
+        <button id="reset" class="btn btn-warning">Reset</button>
+
+        <button id="delete-all" class="btn btn-danger">Delete all</button>
+      </div>
+
+      <div id="output-section" aria-live="polite" aria-atomic="true"></div>
+    </div>
+
+
+  </div>
+
+</body>
+
+</html>
+
+<script src="buddy.js"></script>
+</body>
+
+</html>
