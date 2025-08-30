@@ -57,21 +57,22 @@
       </form>
 
       <div class="buttons-row">
-        <span>Single Match</span>
-        <label class="switch">
-          <input id="switch" type="checkbox">
-          <span class="slider round"></span>
-        </label>
-        <span>Instant Pairs</span><br>
+        
 
         <button id="buttonGenerator" class="btn btn-success">Generate Buddy Match</button>
 
         <button id="reset" class="btn btn-warning">Reset</button>
 
         <button id="delete-all" class="btn btn-danger">Delete all</button>
+        <button id="show-names" class="btn btn-info">Show Available Names</button>
+
       </div>
 
-      <div id="output-section" aria-live="polite" aria-atomic="true"></div>
+<!-- HTML snippet -->
+<div id="output-section">
+    <div id="names-list"></div> <!-- shows added names -->
+    <div id="matches"></div>    <!-- shows pairs/trios -->
+</div>
     </div>
 
 
