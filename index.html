@@ -8,19 +8,46 @@
   <link rel="icon" href="buddy_favicon.png" type="image/png" />
   <link rel="stylesheet" href="buddy.css" />
   <title>Buddy Up</title>
+
+  <style>
+    /* Extra spacing + divider */
+    #output-section {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #f9f9f9;
+    }
+
+    .buttons-row {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 2px solid #eee;
+      text-align: center;
+    }
+
+    .buttons-row button {
+      margin: 0.25rem;
+    }
+
+    #names-list,
+    #matches {
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
 
 <body>
   <div class="page-wrapper">
     <!-- Logo -->
-    <div class="logo">
+    <div class="logo text-center">
       <img src="buddy_logo.png" alt="Buddy Up logo" class="logo-image">
     </div>
 
     <!-- Main form container -->
     <div class="container">
       <h1 class="text-primary">The Ultimate Buddy Generator</h1>
-      <p class="lead">Type in a name and find a buddy!</p>
+      <p class="lead">Type some names below and hit <i>Generate Buddy Match</i> to match those buddies into random pairs!</p>
 
       <label for="name-input">Buddy's Name:</label>
       <input id="name-input" class="form-control" type="text" placeholder="Type name here" required />
@@ -29,60 +56,36 @@
         <form method="dialog">
           <p>Delete all buddies?</p>
           <div>
-            <button id="yesDelete-Modal-btn">
-              Yes
-            </button>
-            <button id="dontDeleteModal-btn">
-              No
-            </button>
+            <button id="yesDelete-Modal-btn">Yes</button>
+            <button id="dontDeleteModal-btn">No</button>
           </div>
         </form>
       </dialog>
 
-      <!-- <label for="team-input">Team:</label>
-        <input list="teams" id="team-input" class="form-control" type="text" placeholder="Type team here" required />
-        <datalist id="teams">
-          <option value="EO"></option>
-          <option value="NSPOC"></option>
-          <option value="LEO"></option>
-          <option value="PNT"></option>
-        </datalist> -->
-
       <button id="add-button" class="btn btn-primary btn-block" type="submit" style="margin-top:1.5rem;">
         <span class="glyphicon glyphicon-send"></span> Add Buddy
       </button>
-      <button id="delete-button" class="btn .btn-danger btn-block " type="submit" style="margin-top:1.5rem;">
+      <button id="delete-button" class="btn btn-danger btn-block" type="submit" style="margin-top:1.5rem;">
         <span class="glyphicon glyphicon-trash"></span> Delete Buddy
       </button>
-      </form>
 
-      <div class="buttons-row">
-        
-
-        <button id="buttonGenerator" class="btn btn-success">Generate Buddy Match</button>
-
-        <button id="reset" class="btn btn-warning">Reset</button>
-
-        <button id="delete-all" class="btn btn-danger">Delete all</button>
-        <button id="show-names" class="btn btn-info">Show Available Names</button>
-
+      <!-- Output section -->
+      <div id="output-section">
+        <div id="names-list"></div> <!-- shows added names -->
+        <div id="matches"></div> <!-- shows pairs/trios -->
       </div>
 
-<!-- HTML snippet -->
-<div id="output-section">
-    <div id="names-list"></div> <!-- shows added names -->
-    <div id="matches"></div>    <!-- shows pairs/trios -->
-</div>
+      <!-- Control buttons row moved below output -->
+      <div class="buttons-row">
+        <button id="buttonGenerator" class="btn btn-success">Generate Buddy Match</button>
+        <button id="reset" class="btn btn-warning">Reset</button>
+        <button id="delete-all" class="btn btn-danger">Delete all</button>
+        <button id="show-names" class="btn btn-info">Show Available Names</button>
+      </div>
     </div>
-
-
   </div>
 
-</body>
-
-</html>
-
-<script src="buddy.js"></script>
+  <script src="buddy.js"></script>
 </body>
 
 </html>

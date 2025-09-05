@@ -113,7 +113,7 @@ showNamesButton.addEventListener('click', () => {
 // --- MATCH GENERATION ---
 const generateAllMatches = () => {
     if (Object.keys(employeeList).length === 0) {
-        alert("Please add some buddies before generating matches!");
+        alert("You need to add some names first!");
         return;
     }
 
@@ -132,19 +132,25 @@ const generateAllMatches = () => {
     }
 
     while (sessionPool.length > 0) {
-        if (sessionPool.length >= 3) {
-            const buddy1 = pickRandomFromSession();
-            const buddy2 = pickRandomFromSession();
-            matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee}</div><br>`;
-        } else if (sessionPool.length === 2) {
-            const buddy1 = pickRandomFromSession();
-            const buddy2 = pickRandomFromSession();
-            matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee}</div><br>`;
-        } else {
-            const last = pickRandomFromSession();
-            matchesDiv.innerHTML += `<div class="text-center text-muted" style="font-size:20px">${last[1].employee} has no match 😢</div><br>`;
-        }
+    if (sessionPool.length > 3) {
+        // Normal pairing while more than 3 left
+        const buddy1 = pickRandomFromSession();
+        const buddy2 = pickRandomFromSession();
+        matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee}</div><br>`;
+    } else if (sessionPool.length === 3) {
+        // Handle trio case
+        const buddy1 = pickRandomFromSession();
+        const buddy2 = pickRandomFromSession();
+        const buddy3 = pickRandomFromSession();
+        matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee} ❤️ ${buddy3[1].employee}</div><br>`;
+    } else if (sessionPool.length === 2) {
+        // Final pair
+        const buddy1 = pickRandomFromSession();
+        const buddy2 = pickRandomFromSession();
+        matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee}</div><br>`;
     }
+}
+
 };
 
 // --- BUTTON EVENTS ---
@@ -152,6 +158,7 @@ buttonGenerator.addEventListener('click', generateAllMatches);
 
 resetButton.addEventListener('click', () => {
     matchesDiv.innerHTML = ''; // only clear matches
+    namesListDiv.innerHTML = ''; //clears names
 });
 
 deleteAll.addEventListener('click', () => {
