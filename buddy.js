@@ -61,6 +61,17 @@ addButton.addEventListener('click', (event) => {
         return;
     }
 
+    // Check for duplicate (case-insensitive)
+    const exists = Object.values(employeeList).some(
+        e => e.employee.toLowerCase() === employeeName.toLowerCase()
+    );
+
+    if (exists) {
+        alert(`${employeeName} has already been entered!`);
+        nameInput.value = "";
+        return;
+    }
+
     const newId = Object.keys(employeeList).length + 1;
     employeeList[newId] = { employee: employeeName };
     localStorage.setItem('addedEmployeeList', JSON.stringify(employeeList));
@@ -132,25 +143,24 @@ const generateAllMatches = () => {
     }
 
     while (sessionPool.length > 0) {
-    if (sessionPool.length > 3) {
-        // Normal pairing while more than 3 left
-        const buddy1 = pickRandomFromSession();
-        const buddy2 = pickRandomFromSession();
-        matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee}</div><br>`;
-    } else if (sessionPool.length === 3) {
-        // Handle trio case
-        const buddy1 = pickRandomFromSession();
-        const buddy2 = pickRandomFromSession();
-        const buddy3 = pickRandomFromSession();
-        matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee} ❤️ ${buddy3[1].employee}</div><br>`;
-    } else if (sessionPool.length === 2) {
-        // Final pair
-        const buddy1 = pickRandomFromSession();
-        const buddy2 = pickRandomFromSession();
-        matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee}</div><br>`;
+        if (sessionPool.length > 3) {
+            // Normal pairing while more than 3 left
+            const buddy1 = pickRandomFromSession();
+            const buddy2 = pickRandomFromSession();
+            matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee}</div><br>`;
+        } else if (sessionPool.length === 3) {
+            // Handle trio case
+            const buddy1 = pickRandomFromSession();
+            const buddy2 = pickRandomFromSession();
+            const buddy3 = pickRandomFromSession();
+            matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee} ❤️ ${buddy3[1].employee}</div><br>`;
+        } else if (sessionPool.length === 2) {
+            // Final pair
+            const buddy1 = pickRandomFromSession();
+            const buddy2 = pickRandomFromSession();
+            matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee}</div><br>`;
+        }
     }
-}
-
 };
 
 // --- BUTTON EVENTS ---
