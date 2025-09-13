@@ -9,10 +9,9 @@
   <link rel="stylesheet" href="buddy.css" />
   <title>Buddy Up</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3403880589520361"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 
   <style>
-    /* Extra spacing + divider */
     #output-section {
       margin-top: 2rem;
       padding: 1rem;
@@ -41,12 +40,10 @@
 
 <body>
   <div class="page-wrapper">
-    <!-- Logo -->
     <div class="logo text-center">
       <img src="buddy_logo.png" alt="Buddy Up logo" class="logo-image">
     </div>
 
-    <!-- Main form container -->
     <div class="container">
       <h1 class="text-primary">The Ultimate Buddy Generator</h1>
       <p class="lead">Input some names and hit <i>Generate Buddy Match</i> to match those buddies into random pairs!</p>
@@ -67,17 +64,30 @@
       <button id="add-button" class="btn btn-primary btn-block" type="submit" style="margin-top:1.5rem;">
         <span class="glyphicon glyphicon-send"></span> Add Buddy
       </button>
-      <button id="delete-button" class="btn btn-danger btn-block" type="submit" style="margin-top:1.5rem;">
+      <button id="delete-button" class="btn btn-danger btn-block" type="button" style="margin-top:1.5rem;"
+        data-toggle="modal" data-target="#deleteModal">
         <span class="glyphicon glyphicon-trash"></span> Delete Buddy
       </button>
 
-      <!-- Output section -->
-      <div id="output-section">
-        <div id="names-list"></div> <!-- shows added names -->
-        <div id="matches"></div> <!-- shows pairs/trios -->
+      <!-- AdSense block (above matches) -->
+      <div style="margin:20px 0; text-align:center;">
+        <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-3403880589520361"
+          data-ad-slot="1111111111"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
       </div>
 
-      <!-- Control buttons row moved below output -->
+      <!-- Output -->
+      <div id="output-section">
+        <div id="names-list"></div>
+        <div id="matches"></div>
+      </div>
+
       <div class="buttons-row">
         <button id="buttonGenerator" class="btn btn-success">Generate Buddy Match</button>
         <button id="reset" class="btn btn-warning">Reset</button>
@@ -86,6 +96,26 @@
       </div>
     </div>
   </div>
+
+  <!-- AdSense block (above footer) -->
+  <div style="margin:20px 0; text-align:center;">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-3403880589520361"
+      data-ad-slot="2222222222"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <footer style="text-align:center; margin-top:40px; font-size:14px;">
+    <a href="about.html">About</a> |
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms of Use</a> |
+    <a href="contact.html">Contact</a>
+  </footer>
 
   <script src="buddy.js"></script>
 </body>
