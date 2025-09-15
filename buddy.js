@@ -181,4 +181,8 @@ deleteAllModalBtn.addEventListener('click', () => {
     localStorage.removeItem('addedEmployeeList');
     namesListDiv.innerHTML = '';
     matchesDiv.innerHTML = '';
+
+    // Close the modal after deletion
+    dialogBox.close();
 });
+

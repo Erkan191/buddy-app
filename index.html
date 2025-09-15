@@ -2,122 +2,184 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-  <link rel="icon" href="buddy_favicon.png" type="image/png" />
-  <link rel="stylesheet" href="buddy.css" />
-  <title>Buddy Up</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- SEO / Meta -->
+  <title>Buddy Matcher - Random Name Pair Generator</title>
+  <meta name="description" content="Buddy Matcher instantly generates random buddy pairs or trios from any list of names. Perfect for teachers, event hosts, and team leaders.">
+  <meta name="keywords" content="Buddy Matcher, random pair generator, team building, group activities, icebreakers, teacher tools">
+  <meta name="author" content="Your Name or Company">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Buddy Matcher - Random Name Pair Generator">
+  <meta property="og:description" content="Easily create random buddy pairs or trios for events, classrooms, or teams.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="buddy_logo.png">
+  <meta property="og:url" content="https://buddymatcher.co.uk/">
+  
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="buddy_favicon.png" type="image/png">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="buddy.css">
+
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3403880589520361"
     crossorigin="anonymous"></script>
 
   <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #34495e;
+      background-color: #fafafa;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      color: #2c3e50;
+    }
+
+    .lead {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 1rem;
+    }
+
+    strong {
+      color: #3498db;
+      font-weight: 700;
+    }
+
+    em {
+      color: #e67e22;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .btn {
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 10px 18px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
     #output-section {
       margin-top: 2rem;
       padding: 1rem;
       border: 1px solid #ddd;
       border-radius: 6px;
       background: #f9f9f9;
+      font-size: 1rem;
     }
 
-    .buttons-row {
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 2px solid #eee;
-      text-align: center;
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #7f8c8d;
     }
 
-    .buttons-row button {
-      margin: 0.25rem;
+    footer a {
+      color: #3498db;
+      text-decoration: none;
     }
 
-    #names-list,
-    #matches {
-      margin-bottom: 1rem;
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
-  <div class="page-wrapper">
-    <div class="logo text-center">
-      <img src="buddy_logo.png" alt="Buddy Up logo" class="logo-image">
-    </div>
+  <div class="container py-4">
 
-    <div class="container">
-      <h1 class="text-primary">The Ultimate Buddy Generator</h1>
-      <p class="lead">Input some names and hit <i>Generate Buddy Match</i> to match those buddies into random pairs!</p>
+    <!-- Logo Section -->
+    <section class="text-center mb-5">
+      <img src="buddy_logo.png" alt="Buddy Matcher logo" class="img-fluid" style="max-width:250px;">
+    </section>
 
-      <label for="name-input">Buddy's Name:</label>
-      <input id="name-input" class="form-control" type="text" placeholder="Type name here" required />
+    <!-- Description Section -->
+    <section class="bg-white p-4 rounded shadow-sm mb-5">
+      <h1 class="text-primary text-center mb-3">The Ultimate Buddy Generator</h1>
+      <p class="lead text-center">
+        Need to pair up names quickly and fairly? <strong>Buddy Matcher</strong> is a free online tool 
+        that instantly generates random buddy pairs (or trios) from any list of names. 
+      </p>
+      <p>
+        Whether you’re a <strong>teacher</strong> pairing students for group activities, an 
+        <strong>event host</strong> running icebreakers, or a <strong>team leader</strong> setting up 
+        a workplace buddy system, our randomiser makes it <em>fast, fun, and effortless</em>.
+      </p>
+      <p>
+        Simply type in the names, hit <strong>Generate Buddy Match</strong>, and watch as 
+        everyone gets matched up fairly and randomly. No more bias, no more wasted time — 
+        just easy, instant buddy matches!
+      </p>
+    </section>
 
-      <dialog id="confirm-deleteAll-dialog">
-        <form method="dialog">
-          <p>Delete all buddies?</p>
-          <div>
-            <button id="yesDelete-Modal-btn">Yes</button>
-            <button id="dontDeleteModal-btn">No</button>
-          </div>
-        </form>
-      </dialog>
+    <!-- App Section -->
+    <section class="bg-white p-4 rounded shadow-sm mb-5">
 
-      <button id="add-button" class="btn btn-primary btn-block" type="submit" style="margin-top:1.5rem;">
-        <span class="glyphicon glyphicon-send"></span> Add Buddy
-      </button>
-      <button id="delete-button" class="btn btn-danger btn-block" type="button" style="margin-top:1.5rem;"
-        data-toggle="modal" data-target="#deleteModal">
-        <span class="glyphicon glyphicon-trash"></span> Delete Buddy
-      </button>
-
-      <!-- AdSense block (above matches) -->
-      <div style="margin:20px 0; text-align:center;">
-        <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-client="ca-pub-3403880589520361"
-          data-ad-slot="1111111111"
-          data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+      <!-- Input Section -->
+      <div class="mb-3">
+        <label for="name-input" class="form-label">Buddy's Name:</label>
+        <input id="name-input" class="form-control" type="text" placeholder="Type name here" required />
       </div>
 
-      <!-- Output -->
-      <div id="output-section">
+      <!-- Action Buttons -->
+      <div class="d-grid gap-2 mb-4">
+        <button id="add-button" class="btn btn-primary" type="submit">➕ Add Buddy</button>
+        <button id="delete-button" class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">🗑 Delete Buddy</button>
+      </div>
+
+      <!-- Output Section -->
+      <div id="output-section" class="fade-in mb-4">
         <div id="names-list"></div>
         <div id="matches"></div>
       </div>
 
-      <div class="buttons-row">
+      <!-- Buttons Row -->
+      <div class="d-flex flex-wrap justify-content-center gap-3">
         <button id="buttonGenerator" class="btn btn-success">Generate Buddy Match</button>
         <button id="reset" class="btn btn-warning">Reset</button>
         <button id="delete-all" class="btn btn-danger">Delete all</button>
         <button id="show-names" class="btn btn-info">Show Available Names</button>
       </div>
+
+    </section>
+  </div>
+
+  <!-- Delete All Confirmation Dialog -->
+  <dialog id="confirm-deleteAll-dialog" class="p-4 rounded shadow">
+    <h5 class="mb-3">Are you sure you want to delete all buddies?</h5>
+    <div class="d-flex justify-content-end gap-2">
+      <button id="yesDelete-Modal-btn" class="btn btn-danger">Yes, delete all</button>
+      <button onclick="document.getElementById('confirm-deleteAll-dialog').close()" class="btn btn-secondary">Cancel</button>
     </div>
-  </div>
+  </dialog>
 
-  <!-- AdSense block (above footer) -->
-  <div style="margin:20px 0; text-align:center;">
-    <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-3403880589520361"
-      data-ad-slot="2222222222"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-
-  <footer style="text-align:center; margin-top:40px; font-size:14px;">
+  <!-- Footer -->
+  <footer class="text-center py-3">
     <a href="about.html">About</a> |
     <a href="privacy.html">Privacy Policy</a> |
     <a href="terms.html">Terms of Use</a> |
     <a href="contact.html">Contact</a>
   </footer>
 
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="buddy.js"></script>
 </body>
-
 </html>
