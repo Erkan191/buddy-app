@@ -98,20 +98,29 @@ deleteButton.addEventListener('click', (event) => {
         return;
     }
 
+    // Find the buddy in the employeeList
     const entry = Object.entries(employeeList).find(
         ([key, value]) => value.employee.toLowerCase() === inputName.toLowerCase()
     );
+
     if (entry) {
         const [id] = entry;
         delete employeeList[id];
+
+        // Update localStorage
         localStorage.setItem('addedEmployeeList', JSON.stringify(employeeList));
-        renderNamesList();
+
+        // Clear UI
+        renderNamesList();       // refresh the names list
+        matchesDiv.innerHTML = ''; // remove any current matches
+
     } else {
         alert("Buddy not found");
     }
 
     nameInput.value = "";
 });
+
 
 showNamesButton.addEventListener('click', () => {
     if (Object.keys(employeeList).length === 0) {
