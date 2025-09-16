@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,57 +15,111 @@
   <link rel="icon" type="image/png" href="buddy_favicon.png">
 
   <style>
-    body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; background-color:#f8f9fa; color:#34495e; line-height:1.6; }
-    header { background:#fff; padding:1rem 2rem; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
-    header .logo { font-weight:700; font-size:1.5rem; color:#3498db; }
-    nav a { margin-left:1.5rem; text-decoration:none; color:#3498db; font-weight:500; }
-    .hero { padding:4rem 2rem; text-align:left; max-width:900px; margin:0 auto; }
-    .hero h1 { font-size:2.5rem; font-weight:700; margin-bottom:1rem; color:#2c3e50; }
-    .hero p { font-size:1.05rem; margin-bottom:1rem; color:#34495e; }
-    .buttons { display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem; }
-    .btn { font-weight:600; border-radius:6px; padding:0.75rem 1.5rem; transition:all 0.2s; text-decoration:none; display:inline-block; }
-    .btn-primary { background:#3498db; color:#fff; border:none; }
-    .btn-primary:hover { background:#217dbb; color:#fff; }
-    .btn-secondary { background:transparent; border:2px solid #3498db; color:#3498db; }
-    .btn-secondary:hover { background:#3498db; color:#fff; }
-    footer { text-align:center; padding:2rem 1rem; font-size:0.9rem; color:#777; }
-    .form-label { font-weight: 600; }
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #34495e;
+      line-height: 1.6;
+    }
+
+    .hero {
+      padding: 4rem 2rem;
+      text-align: left;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+      color: #34495e;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 0.75rem 1.5rem;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #3498db;
+      color: #fff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: #217dbb;
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid #3498db;
+      color: #3498db;
+    }
+
+    .btn-secondary:hover {
+      background: #3498db;
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    .form-label {
+      font-weight: 600;
+    }
   </style>
 </head>
+
 <body>
-
   <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-  <div class="container">
-    <!-- Logo -->
-    <a class="navbar-brand fw-bold text-primary" href="index.html">
-      <img src="buddy_logo.png" alt="Buddy Matcher Logo" width="40" height="40" class="me-2">
-      Buddy Matcher
-    </a>
-
-    <!-- Mobile toggle -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Links -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-        <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-        <li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
-      </ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Buddy Matcher</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
+          <li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-
+  <!-- Main Content -->
   <main class="hero">
     <h1>Contact</h1>
-    <p class="mb-4">Have feedback, a suggestion, or found a bug? We’d love to hear from you. Use the form below and your email client will open with a pre-filled message. Alternatively, email us at <a href="mailto:erkan.said22@gmail.com">buddymatcher@buddyup.com</a>.</p>
+    <p>Have feedback, a suggestion, or found a bug? We’d love to hear from you. Use the form below and your email
+      client will open with a pre-filled message. Alternatively, email us at
+      <a href="mailto:erkan.said22@gmail.com">buddymatcher@buddyup.com</a>.</p>
 
     <!-- Contact form -->
     <form id="contact-form" class="row g-3" novalidate>
@@ -85,13 +140,15 @@
 
       <div class="col-12">
         <label for="contact-message" class="form-label">Message</label>
-        <textarea id="contact-message" class="form-control" rows="6" placeholder="Write your message here..." required></textarea>
+        <textarea id="contact-message" class="form-control" rows="6"
+          placeholder="Write your message here..." required></textarea>
       </div>
 
       <div class="col-12 d-flex gap-2">
         <button id="contact-send" type="submit" class="btn btn-primary">Send (opens email)</button>
         <button id="contact-clear" type="button" class="btn btn-secondary">Clear</button>
-        <a href="index.html" class="btn btn-link ms-auto" style="color:#3498db; text-decoration:none;">← Back to Buddy Matcher</a>
+        <a href="index.html" class="btn btn-link ms-auto"
+          style="color:#3498db; text-decoration:none;">← Back to Buddy Matcher</a>
       </div>
     </form>
   </main>
@@ -100,19 +157,18 @@
 
   <!-- AdSense -->
   <div class="text-center">
-    <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-3403880589520361"
-      data-ad-slot="6666666666"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3403880589520361"
+      data-ad-slot="6666666666" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
   </div>
 
   <!-- Buy Me a Coffee -->
   <div style="text-align:center; margin:20px 0;">
     <a href="https://buymeacoffee.com/buddyup" target="_blank">
-      <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" style="height:60px; width:auto;">
+      <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee"
+        style="height:60px; width:auto;">
     </a>
   </div>
 
@@ -120,16 +176,15 @@
     Made with 💻 in spare time by Erkan Said
   </footer>
 
-  <!-- Small script to build mailto: link from form inputs -->
+  <!-- Mailto form script -->
   <script>
     (function () {
       const form = document.getElementById('contact-form');
       const clearBtn = document.getElementById('contact-clear');
-      const recipient = 'erkan.said22@gmail.com'; // change if you want a different recipient
+      const recipient = 'erkan.said22@gmail.com';
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-
         const name = document.getElementById('contact-name').value.trim();
         const email = document.getElementById('contact-email').value.trim();
         const subject = document.getElementById('contact-subject').value.trim();
@@ -140,22 +195,17 @@
           return;
         }
 
-        // Construct body text
-        let body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0A`;
-        body += encodeURIComponent(message);
-
-        // Build mailto link
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
         const mailto = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${body}`;
-
-        // Open user's mail client
         window.location.href = mailto;
       });
 
-      clearBtn.addEventListener('click', () => {
-        form.reset();
-      });
+      clearBtn.addEventListener('click', () => form.reset());
     })();
   </script>
 
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
