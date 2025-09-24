@@ -55,40 +55,52 @@ const pickRandomFromSession = () => {
 // --- BUTTON FUNCTIONS ---
 addButton.addEventListener('click', (event) => {
     event.preventDefault();
-    const employeeName = nameInput.value.trim();
-    if (!employeeName) {
+    const rawInput = nameInput.value.trim();
+
+    if (!rawInput) {
         alert("Please enter a buddy name to add.");
         return;
     }
 
-    // Check for duplicate (case-insensitive)
-    const exists = Object.values(employeeList).some(
-        e => e.employee.toLowerCase() === employeeName.toLowerCase()
-    );
+    // Split input on any whitespace (spaces, tabs, or newlines)
+    const namesArray = rawInput.split(/\s+/);
 
-    if (exists) {
-        alert(`${employeeName} has already been entered!`);
-        nameInput.value = "";
-        return;
+    let addedNames = [];
+
+    namesArray.forEach((employeeName) => {
+        // Check for duplicate (case-insensitive)
+        const exists = Object.values(employeeList).some(
+            e => e.employee.toLowerCase() === employeeName.toLowerCase()
+        );
+
+        if (!exists && employeeName) {
+            const newId = Object.keys(employeeList).length + 1;
+            employeeList[newId] = { employee: employeeName };
+            localStorage.setItem('addedEmployeeList', JSON.stringify(employeeList));
+
+            // Show the newly added buddy immediately
+            const div = document.createElement('div');
+            div.textContent = employeeName;
+            div.style.fontSize = "24px";
+            div.classList.add("text-center");
+            div.style.opacity = 0;
+            namesListDiv.appendChild(div);
+            setTimeout(() => {
+                div.style.transition = "opacity 0.8s";
+                div.style.opacity = 1;
+            }, 50);
+
+            addedNames.push(employeeName);
+        }
+    });
+
+    if (addedNames.length === 0) {
+        alert("No new names added (duplicates were skipped).");
     }
 
-    const newId = Object.keys(employeeList).length + 1;
-    employeeList[newId] = { employee: employeeName };
-    localStorage.setItem('addedEmployeeList', JSON.stringify(employeeList));
-    nameInput.value = "";
-
-    // Show the newly added buddy immediately at the top
-    const div = document.createElement('div');
-    div.textContent = employeeName;
-    div.style.fontSize = "24px";
-    div.classList.add("text-center");
-    div.style.opacity = 0;
-    namesListDiv.appendChild(div);
-    setTimeout(() => {
-        div.style.transition = "opacity 0.8s";
-        div.style.opacity = 1;
-    }, 50);
+    nameInput.value = ""; // clear input
 });
+
 
 deleteButton.addEventListener('click', (event) => {
     event.preventDefault();
