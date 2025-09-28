@@ -3,22 +3,18 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
         Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
     padding-bottom: 100px;
-    text-align: center;
-
+    /* Removed text-align: center to stop forcing everything centered */
 }
 
 .logo-image {
     max-width: 400px;
     height: auto;
-    margin-bottom: 0 rem;
-    /* reduced space */
-    /* remove extra space */
+    margin-bottom: 0rem;
 }
 
 .container {
     background: white;
     padding: 1px 2rem 1.5rem;
-    /* reduce top padding */
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     max-width: 480px;
@@ -107,11 +103,44 @@ input.form-control {
 }
 
 /* Checked state */
-.switch input:checked+.slider {
+.switch input:checked + .slider {
     background-color: #5cb85c;
-    /* Bootstrap success green */
 }
 
-.switch input:checked+.slider:before {
+.switch input:checked + .slider:before {
     transform: translateX(30px);
+}
+
+/* --- Reset unwanted navbar overrides --- */
+.navbar {
+  background-color: #198754 !important; /* Bootstrap bg-success green */
+}
+
+.navbar .container {
+  background: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.navbar-collapse {
+  background: none !important;
+}
+/* Match navbar style across all pages */
+.navbar {
+  background-color: #198754 !important; /* Same dark green */
+}
+
+.navbar .nav-link {
+  color: #fff !important;         /* White text */
+  font-weight: 500;
+}
+
+.navbar .nav-link:hover {
+  color: #dcdcdc !important;      /* Light grey on hover */
+}
+
+.navbar .nav-link.active {
+  color: #fff !important;
+  background: none !important;    /* Remove Bootstrap's green box */
+  font-weight: 700;               /* Bold active link */
 }

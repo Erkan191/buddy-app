@@ -95,7 +95,7 @@ addButton.addEventListener('click', (event) => {
     });
 
     if (addedNames.length === 0) {
-        alert("No new names added (duplicates were skipped).");
+        alert("You've already entered this name!");
     }
 
     nameInput.value = ""; // clear input
@@ -207,3 +207,8 @@ deleteAllModalBtn.addEventListener('click', () => {
     dialogBox.close();
 });
 
+nameInput.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+        addButton.click()
+    }
+});

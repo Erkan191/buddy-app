@@ -2,45 +2,46 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <!-- SEO / Meta -->
   <title>Buddy Matcher - Random Name Pair Generator</title>
   <meta name="description" content="Buddy Matcher instantly generates random buddy pairs or trios from any list of names. Perfect for teachers, event hosts, and team leaders.">
   <meta name="keywords" content="Buddy Matcher, random pair generator, team building, group activities, icebreakers, teacher tools">
-  <meta name="author" content="Your Name or Company">
+  <meta name="author" content="Erkan Said">
   <meta name="robots" content="index, follow">
-  
+
   <!-- Open Graph / Social -->
   <meta property="og:title" content="Buddy Matcher - Random Name Pair Generator">
   <meta property="og:description" content="Easily create random buddy pairs or trios for events, classrooms, or teams.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="buddy_logo.png">
   <meta property="og:url" content="https://buddymatcher.co.uk/">
-  
+
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  
+
   <!-- Favicon -->
   <link rel="icon" href="buddy_favicon.png" type="image/png">
-  
-  <!-- Custom CSS -->
+
+  <!-- Your site CSS -->
   <link rel="stylesheet" href="buddy.css">
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3403880589520361"
     crossorigin="anonymous"></script>
 
+  <!-- Small site styles + navbar overrides -->
   <style>
+    /* Base page styles */
     body {
-      padding-top: 100px;
+      margin: 0;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.8;
+      background-color: #f8f9fa;
       color: #34495e;
-      background-color: #fafafa;
+      line-height: 1.6;
+      font-size: 16px;
     }
 
     h1, h2, h3 {
@@ -55,15 +56,33 @@
       margin-bottom: 1rem;
     }
 
-    strong {
-      color: #3498db;
-      font-weight: 700;
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      padding: 2rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    em {
-      color: #e67e22;
-      font-style: normal;
-      font-weight: 600;
+    @media (min-width: 992px) {
+      .hero {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+      }
+    }
+
+    .hero img {
+      max-width: 350px;
+      width: 100%;
+    }
+
+    .hero-content {
+      flex: 1;
     }
 
     .btn {
@@ -75,22 +94,23 @@
 
     .btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
     #output-section {
-      margin-top: 2rem;
+      margin-top: 1rem;
       padding: 1rem;
       border: 1px solid #ddd;
       border-radius: 6px;
-      background: #f9f9f9;
+      background: #fff;
       font-size: 1rem;
     }
 
     footer {
-      margin-top: 40px;
-      font-size: 14px;
-      color: #7f8c8d;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: #777;
     }
 
     footer a {
@@ -101,88 +121,329 @@
     footer a:hover {
       text-decoration: underline;
     }
+
+    /* NAVBAR OVERRIDES */
+    .navbar.navbar-dark.bg-success {
+      background-color: #198754 !important;
+    }
+
+    .navbar-brand {
+      color: #fff !important;
+      font-weight: 700;
+    }
+
+    .navbar .nav-link {
+      color: rgba(255,255,255,0.95) !important;
+      font-weight: 600;
+    }
+
+    .navbar .nav-link:hover {
+      color: #fff !important;
+    }
+
+    .navbar .nav-link.active {
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      color: #fff !important;
+    }
+
+    .navbar-toggler {
+      border: none;
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(100%);
+    }
+
+    /* Hero text flair */
+.hero-content h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.hero-content .lead {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1.2rem;
+}
+
+.hero-content p {
+  font-size: 1.05rem;
+  color: #34495e;
+  line-height: 1.65;
+}
+
+.hero-content p strong {
+  color: #3498db;
+  font-weight: 700;
+}
+
+/* App section headers & labels */
+.form-label {
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+/* Buttons - flashier hover */
+.btn-primary {
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(90deg, #2ecc71, #3498db);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.btn-success {
+  background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+.btn-success:hover {
+  background: linear-gradient(90deg, #20c997, #28a745);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* Fade-in output area with subtle shine */
+#output-section {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#output-section:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+/* --- HERO SECTION ANIMATION --- */
+.hero-content h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  animation: gradientShift 5s ease-in-out infinite alternate;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-content .lead {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1.2rem;
+  animation: fadeInUp 1s ease forwards;
+}
+
+.hero-content p {
+  font-size: 1.05rem;
+  color: #34495e;
+  line-height: 1.65;
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+.hero-content p strong {
+  color: #3498db;
+  font-weight: 700;
+}
+
+/* --- FADE IN ANIMATION --- */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- BUTTONS FLASH & GLOW --- */
+.btn-primary, .btn-success, .btn-warning, .btn-danger, .btn-info {
+  font-weight: 700;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover, .btn-success:hover, .btn-warning:hover, .btn-danger:hover, .btn-info:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2), 0 0 12px rgba(255,255,255,0.2);
+}
+
+/* Add subtle gradient animations to main buttons */
+.btn-primary {
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  color: #fff;
+}
+.btn-primary:hover {
+  background: linear-gradient(90deg, #2ecc71, #3498db);
+}
+
+.btn-success {
+  background: linear-gradient(90deg, #28a745, #20c997);
+}
+.btn-success:hover {
+  background: linear-gradient(90deg, #20c997, #28a745);
+}
+
+/* --- OUTPUT SECTION INTERACTIVITY --- */
+#output-section {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#output-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+}
+
+/* --- LOGO ANIMATION --- */
+.img-fluid.max-logo {
+  max-width: 400px;
+  animation: floatLogo 4s ease-in-out infinite alternate;
+}
+
+@keyframes floatLogo {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+  .hero-content .lead {
+    font-size: 1.2rem;
+  }
+  #output-section {
+    font-size: 0.95rem;
+  }
+}
+
   </style>
 </head>
 
 <body>
-
-    <div class="container py-4">
-      
-    <!-- Logo Section -->
-    <section class="text-center mb-5">
-      <img src="buddy_logo.png" alt="Buddy Matcher logo" class="img-fluid" style="max-width:350px;">
-    </section>
-
-    <!-- Description Section -->
-    <section class="bg-blue p-4 rounded shadow-sm mb-5">
-      <h1 class="text-primary text-center mb-3">The Ultimate Buddy Generator</h1>
-      <p class="lead text-center">
-        Need to pair up names quickly and fairly? <strong>Buddy Matcher</strong> is a free online tool 
-        that instantly generates random buddy pairs (or trios) from any list of names. 
-      </p>
-      <p>
-        Whether you’re a <strong>teacher</strong> pairing students for group activities, an 
-        <strong>event host</strong> running icebreakers, or a <strong>team leader</strong> setting up 
-        a workplace buddy system, our randomiser makes it <em>fast, fun, and effortless</em>.
-      </p>
-      <p>
-        Simply type in the names, hit <strong>Generate Buddy Match</strong>, and watch as 
-        everyone gets matched up fairly and randomly. No more bias, no more wasted time — 
-        just easy, instant buddy matches!
-      </p>
-    </section>
-
-    <!-- App Section -->
-    <section class="bg-white p-4 rounded shadow-sm mb-5">
-
-      <!-- Input Section -->
-      <div class="mb-3">
-        <label for="name-input" class="form-label">Buddy's Name:</label>
-        <input id="name-input" class="form-control" type="text" placeholder="Type name here" required />
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Buddy Matcher</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
+          <li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
+        </ul>
       </div>
+    </div>
+  </nav>
 
-      <!-- Action Buttons -->
-      <div class="d-grid gap-2 mb-4">
-        <button id="add-button" class="btn btn-primary" type="submit">➕ Add Buddy</button>
-        <button id="delete-button" class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">🗑 Delete Buddy</button>
-      </div>
+  <!-- Main Content -->
+  <main class="container-fluid py-4">
+    <div class="container" style="max-width: 1200px;">
+      <!-- Hero Section -->
+      <section class="hero mb-5">
+        <img src="buddy_logo.png" alt="Buddy Matcher logo" class="img-fluid max-logo">
+        <div class="hero-content">
+          <h1 class="text-primary mb-3">The Ultimate Buddy Generator</h1>
+          <p class="lead text-center">
+  Need to pair up names quickly and fairly? <strong>Buddy Matcher</strong> is a free online tool
+  that instantly generates random buddy pairs (or trios) from any list of names. 
+  <em>New! 🎉 You can now copy entire columns of names straight from your spreadsheet. Just paste them into the input box below and — voilà — instant buddy matches!</em>
+</p>
+        </div>
+      </section>
 
-      <!-- Output Section -->
-      <div id="output-section" class="fade-in mb-4">
-        <div id="names-list"></div>
-        <div id="matches"></div>
-      </div>
+      <!-- App Section -->
+      <section class="bg-white p-4 rounded shadow-sm mb-5">
+        <div class="mb-3">
+          <label for="name-input" class="form-label">Buddy's Name:</label>
+          <input id="name-input" class="form-control" type="text" placeholder="Type name here" />
+        </div>
 
-      <!-- Buttons Row -->
-      <div class="d-flex flex-wrap justify-content-center gap-3">
-        <button id="buttonGenerator" class="btn btn-success">Generate Buddy Match</button>
-        <button id="reset" class="btn btn-warning">Reset</button>
-        <button id="delete-all" class="btn btn-danger">Delete all</button>
-        <button id="show-names" class="btn btn-info">Show Available Names</button>
-      </div>
+        <div class="d-grid gap-2 mb-4">
+          <button id="add-button" class="btn btn-primary" type="button">➕ Add Buddy</button>
+          <button id="delete-button" class="btn btn-danger" type="button">🗑 Delete Buddy</button>
+        </div>
 
-    </section>
+        <div id="output-section" class="fade-in mb-4">
+          <div id="names-list"></div>
+          <div id="matches"></div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-center gap-3">
+          <button id="buttonGenerator" class="btn btn-success">Generate Buddy Match</button>
+          <button id="reset" class="btn btn-warning">Reset</button>
+          <button id="delete-all" class="btn btn-danger">Delete all</button>
+          <button id="show-names" class="btn btn-info">Show Available Names</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  
+
+  <!-- Buy Me a Coffee -->
+  <div class="text-center my-4">
+    <a href="https://buymeacoffee.com/buddyup" target="_blank">
+      <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee"
+        style="height:60px; width:auto;">
+    </a>
   </div>
 
-  <!-- Delete All Confirmation Dialog -->
-  <dialog id="confirm-deleteAll-dialog" class="p-4 rounded shadow">
-    <h5 class="mb-3">Are you sure you want to delete all buddies?</h5>
-    <div class="d-flex justify-content-end gap-2">
-      <button id="yesDelete-Modal-btn" class="btn btn-danger">Yes, delete all</button>
-      <button onclick="document.getElementById('confirm-deleteAll-dialog').close()" class="btn btn-secondary">Cancel</button>
-    </div>
-  </dialog>
-
-  <!-- Footer -->
-  <footer class="text-center py-3">
-    <a href="about.html">About</a> |
-    <a href="privacy.html">Privacy Policy</a> |
-    <a href="terms.html">Terms of Use</a> |
-    <a href="contact.html">Contact</a>
+  <footer>
+    Made with 💻 in spare time by Erkan Said
   </footer>
 
-  <!-- Bootstrap 5 JS -->
+  <!-- AdSense -->
+  <div class="text-center">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3403880589520361"
+      data-ad-slot="6666666666" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Your buddy app JS -->
   <script src="buddy.js"></script>
+
+  <!-- Auto-active navbar link -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('.navbar .nav-link');
+      let current = location.pathname.split('/').pop() || 'index.html';
+      links.forEach(a => {
+        const href = a.getAttribute('href') || '';
+        const normHref = (href === '/' || href === '') ? 'index.html' : href.replace(/^.*[\\/]/, '');
+        a.classList.toggle('active', normHref === current);
+      });
+    });
+  </script>
 </body>
 </html>
