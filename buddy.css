@@ -145,19 +145,14 @@ input.form-control {
   font-weight: 700;               /* Bold active link */
 }
 
+.card, 
 .group-card {
-    display: inline-block;        /* compact width */
-    min-width: 220px;
-    max-width: 300px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 15px 20px;
-    margin: 10px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    vertical-align: top;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
 }
+
 
 .group-card:hover {
     transform: translateY(-3px);
@@ -183,3 +178,37 @@ input.form-control {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+/* --- Recommended: small left nudge + keep cards centered --- */
+main.container-fluid > .container {
+  padding-left: 12px !important;   /* move content a little left */
+  padding-right: 12px !important;
+}
+
+/* make the results area and card grid behave as a centered flex layout */
+#output-section {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* If you used a .card-grid class: ensure it centers */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;   /* center the cards horizontally */
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* card sizing and auto-centering so single cards don't hug the container edge */
+.group-card,
+.card {
+  width: 280px;
+  max-width: calc(100% - 24px);
+  margin: 0.5rem auto;
+}
