@@ -10,6 +10,9 @@ const resetButton = document.getElementById('reset');
 const deleteAll = document.getElementById('delete-all');
 const dialogBox = document.getElementById('confirm-deleteAll-dialog');
 const deleteAllModalBtn = document.getElementById('yesDelete-Modal-btn');
+const groupSizeSelector = document.getElementById('group-size');
+const groupPreviewDiv = document.getElementById('group-preview');
+
 
 // --- DATA ---
 let employeeList = JSON.parse(localStorage.getItem('addedEmployeeList')) || {};
@@ -149,40 +152,77 @@ const generateAllMatches = () => {
         return;
     }
 
-    // fade out names list showing added buddies
     if (namesListDiv.children.length > 0) fadeOutNamesList();
-
-    // clear previous matches
     matchesDiv.innerHTML = '';
-
-    // initialize session pool
     initializeSessionPool();
 
-    if (sessionPool.length === 0) {
-        alert("No buddies to match!");
+    if (sessionPool.length === 0) return;
+
+    let groupSize = parseInt(groupSizeSelector.value);
+    if (groupSize < 2) groupSize = 2;
+    if (groupSize > 10) groupSize = 10;
+
+    const totalNames = sessionPool.length;
+
+    while (sessionPool.length > 0) {
+        let currentGroupSize = groupSize;
+
+        // If remaining names are fewer than group size, adjust smartly
+        if (sessionPool.length <= groupSize) {
+            // If only 1 leftover, take one from previous group
+            if (sessionPool.length === 1 && totalNames > 1) {
+                currentGroupSize = 2; // last group will merge leftover with previous
+            } else {
+                currentGroupSize = sessionPool.length;
+            }
+        } else {
+            // Check for a situation where last leftover would be 1
+            const remainingAfterCurrent = sessionPool.length - groupSize;
+            if (remainingAfterCurrent === 1) {
+                currentGroupSize = groupSize + 1; // pull one more from session so last group isn't single
+            }
+        }
+
+        const group = [];
+        for (let i = 0; i < currentGroupSize; i++) {
+            const buddy = pickRandomFromSession();
+            if (buddy) group.push(buddy[1].employee);
+        }
+
+        matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${group.join(" ❤️ ")}</div><br>`;
+    }
+};
+
+const updateGroupPreview = () => {
+    const groupSize = parseInt(groupSizeSelector.value) || 2;
+    const totalNames = Object.keys(employeeList).length;
+
+    if (totalNames === 0) {
+        groupPreviewDiv.textContent = "Add some buddies to see group distribution.";
         return;
     }
 
-    while (sessionPool.length > 0) {
-        if (sessionPool.length > 3) {
-            // Normal pairing while more than 3 left
-            const buddy1 = pickRandomFromSession();
-            const buddy2 = pickRandomFromSession();
-            matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee}</div><br>`;
-        } else if (sessionPool.length === 3) {
-            // Handle trio case
-            const buddy1 = pickRandomFromSession();
-            const buddy2 = pickRandomFromSession();
-            const buddy3 = pickRandomFromSession();
-            matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee} ❤️ ${buddy3[1].employee}</div><br>`;
-        } else if (sessionPool.length === 2) {
-            // Final pair
-            const buddy1 = pickRandomFromSession();
-            const buddy2 = pickRandomFromSession();
-            matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${buddy1[1].employee} ❤️ ${buddy2[1].employee}</div><br>`;
+    let remaining = totalNames;
+    let groups = [];
+
+    while (remaining > 0) {
+        let currentGroupSize = groupSize;
+
+        // Avoid last group having only 1
+        if (remaining <= groupSize) {
+            currentGroupSize = remaining;
+        } else {
+            if (remaining - groupSize === 1) currentGroupSize = groupSize + 1;
         }
+
+        groups.push(currentGroupSize);
+        remaining -= currentGroupSize;
     }
+
+    groupPreviewDiv.textContent = `Total buddies: ${totalNames} → Group sizes: ${groups.join(", ")}`;
 };
+
+
 
 // --- BUTTON EVENTS ---
 buttonGenerator.addEventListener('click', generateAllMatches);
