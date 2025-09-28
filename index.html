@@ -32,7 +32,7 @@
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3403880589520361"
-    crossorigin="anonymous"></script>
+     crossorigin="anonymous"></script>
 
   <!-- Small site styles + navbar overrides -->
   <style>
@@ -452,6 +452,15 @@
           <div id="names-list"></div>
           <div id="matches"></div>
         </div>
+
+        <dialog id="confirm-deleteAll-dialog">
+  <p>Are you sure you want to delete all buddies?</p>
+  <menu>
+    <button id="yesDelete-Modal-btn">Yes, delete all</button>
+    <button onclick="document.getElementById('confirm-deleteAll-dialog').close()">Cancel</button>
+  </menu>
+</dialog>
+
 
         <div class="d-flex flex-wrap justify-content-center gap-3">
                     <button id="reset" class="btn btn-warning">Reset</button>
