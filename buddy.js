@@ -163,24 +163,23 @@ const generateAllMatches = () => {
     if (groupSize > 10) groupSize = 10;
 
     const totalNames = sessionPool.length;
+    let groupNumber = 1;
+
+    const colors = [
+        'linear-gradient(135deg,#ff6b6b,#f06595)',
+        'linear-gradient(135deg,#339af0,#22b8cf)',
+        'linear-gradient(135deg,#51cf66,#94d82d)',
+        'linear-gradient(135deg,#fcc419,#ff922b)',
+        'linear-gradient(135deg,#845ef7,#5c7cfa)'
+    ];
 
     while (sessionPool.length > 0) {
         let currentGroupSize = groupSize;
 
-        // If remaining names are fewer than group size, adjust smartly
         if (sessionPool.length <= groupSize) {
-            // If only 1 leftover, take one from previous group
-            if (sessionPool.length === 1 && totalNames > 1) {
-                currentGroupSize = 2; // last group will merge leftover with previous
-            } else {
-                currentGroupSize = sessionPool.length;
-            }
-        } else {
-            // Check for a situation where last leftover would be 1
-            const remainingAfterCurrent = sessionPool.length - groupSize;
-            if (remainingAfterCurrent === 1) {
-                currentGroupSize = groupSize + 1; // pull one more from session so last group isn't single
-            }
+            currentGroupSize = sessionPool.length;
+        } else if (sessionPool.length - groupSize === 1) {
+            currentGroupSize = groupSize + 1;
         }
 
         const group = [];
@@ -189,9 +188,38 @@ const generateAllMatches = () => {
             if (buddy) group.push(buddy[1].employee);
         }
 
-        matchesDiv.innerHTML += `<div class="text-center" style="font-size:24px">${group.join(" ❤️ ")}</div><br>`;
+        const groupDiv = document.createElement('div');
+        groupDiv.classList.add('group-card');
+        // Pick a color gradient for this group
+        groupDiv.style.background = '#fff';  // card background neutral
+        groupDiv.style.border = `2px solid ${colors[groupNumber % colors.length].split(',')[0].replace('linear-gradient(135deg,','')}`
+
+        const label = document.createElement('div');
+        label.classList.add('group-label');
+        groupDiv.appendChild(label);
+
+        group.forEach(name => {
+            const pill = document.createElement('span');
+            pill.classList.add('name-pill');
+            pill.textContent = name;
+            pill.style.background = colors[Math.floor(Math.random()*colors.length)];
+            groupDiv.appendChild(pill);
+        });
+
+        matchesDiv.appendChild(groupDiv);
+        groupNumber++;
     }
 };
+
+
+// Helper: generate a random pastel color
+const randomPastelColor = () => {
+    const r = Math.floor((Math.random() * 127) + 127);
+    const g = Math.floor((Math.random() * 127) + 127);
+    const b = Math.floor((Math.random() * 127) + 127);
+    return `rgb(${r},${g},${b})`;
+};
+
 
 const updateGroupPreview = () => {
     const groupSize = parseInt(groupSizeSelector.value) || 2;
