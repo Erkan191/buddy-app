@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- SEO / Meta -->
   <title>Buddy Matcher - Random Name Pair Generator</title>
   <meta name="description"
     content="Buddy Matcher instantly generates random buddy pairs or trios from any list of names. Perfect for teachers, event hosts, and team leaders.">
@@ -14,520 +13,418 @@
   <meta name="author" content="Erkan Said">
   <meta name="robots" content="index, follow">
 
-  <!-- Open Graph / Social -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Buddy Matcher - Random Name Pair Generator">
   <meta property="og:description" content="Easily create random buddy pairs or trios for events, classrooms, or teams.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="buddy_logo.png">
   <meta property="og:url" content="https://buddymatcher.co.uk/">
 
-  <!-- Bootstrap 5 -->
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Favicon -->
   <link rel="icon" href="buddy_favicon.png" type="image/png">
-
-  <!-- Your site CSS -->
   <link rel="stylesheet" href="buddy.css">
 
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3403880589520361"
-     crossorigin="anonymous"></script>
-
-  <!-- Small site styles + navbar overrides -->
   <style>
-    /* Base page styles */
+    /* --- Base --- */
+    :root {
+      --max-inner-width: 1100px;
+      --accent-1: #3498db;
+      --accent-2: #2ecc71;
+      --muted: #6c7a89;
+      --card-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+    }
+
     body {
       margin: 0;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       background-color: #f8f9fa;
       color: #34495e;
       line-height: 1.6;
-      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    h1,
-    h2,
-    h3 {
-      font-weight: 700;
-      color: #2c3e50;
-    }
-
-    .lead {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 1rem;
-    }
-
-    /* Hero Section */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-      padding: 2rem 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    @media (min-width: 992px) {
-      .hero {
-        flex-direction: row;
-        text-align: left;
-        align-items: flex-start;
-      }
-    }
-
-    .hero img {
-      max-width: 350px;
+    section {
       width: 100%;
+      padding: 4rem 1rem;
     }
 
-    .hero-content {
-      flex: 1;
+    .divider {
+      height: 4px;
+      background: linear-gradient(to right, var(--accent-2), var(--accent-1));
+      margin: 0;
     }
 
-    .btn {
-      font-weight: 600;
-      border-radius: 6px;
-      padding: 10px 18px;
-      transition: all 0.2s ease-in-out;
+    /* --- Hero image --- */
+    .hero-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    /* --- Consistent content card (used in sections) --- */
+    .section-wrap {
+      max-width: var(--max-inner-width);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
 
-    #output-section {
-      margin-top: 1rem;
-      padding: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+    .section-card {
       background: #fff;
-      font-size: 1rem;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(16, 24, 40, 0.04);
     }
 
-    footer {
+    .section-title {
+      font-size: 1.9rem;
+      font-weight: 800;
       text-align: center;
-      padding: 2rem 1rem;
-      font-size: 0.9rem;
-      color: #777;
-    }
-
-    footer a {
-      color: #3498db;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* NAVBAR OVERRIDES */
-    .navbar.navbar-dark.bg-success {
-      background-color: #198754 !important;
-    }
-
-    .navbar-brand {
-      color: #fff !important;
-      font-weight: 700;
-    }
-
-    .navbar .nav-link {
-      color: rgba(255, 255, 255, 0.95) !important;
-      font-weight: 600;
-    }
-
-    .navbar .nav-link:hover {
-      color: #fff !important;
-    }
-
-    .navbar .nav-link.active {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 4px;
-      color: #fff !important;
-    }
-
-    .navbar-toggler {
-      border: none;
-    }
-
-    .navbar-toggler-icon {
-      filter: invert(100%);
-    }
-
-    /* Hero text flair */
-    .hero-content h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      background: linear-gradient(90deg, #3498db, #2ecc71);
+      margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 1rem;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
 
-    .hero-content .lead {
-      font-size: 1.35rem;
+    .section-sub {
+      text-align: center;
+      color: #2c3e50;
       font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 1.2rem;
-    }
-
-    .hero-content p {
+      margin-bottom: 1.25rem;
       font-size: 1.05rem;
-      color: #34495e;
-      line-height: 1.65;
     }
 
-    .hero-content p strong {
-      color: #3498db;
-      font-weight: 700;
+    /* --- App page specifics (kept similar) --- */
+    .app-section {
+      background-color: #f0f9f4;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
     }
 
-    /* App section headers & labels */
-    .form-label {
-      font-weight: 700;
-      color: #2c3e50;
-    }
-
-    /* Buttons - flashier hover */
-    .btn-primary {
-      background: linear-gradient(90deg, #3498db, #2ecc71);
-      color: #fff;
-      border: none;
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(90deg, #2ecc71, #3498db);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    }
-
-    .btn-success {
-      background: linear-gradient(90deg, #28a745, #20c997);
-    }
-
-    .btn-success:hover {
-      background: linear-gradient(90deg, #20c997, #28a745);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    }
-
-    /* Fade-in output area with subtle shine */
-    #output-section {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 1rem;
-      font-size: 1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    #output-section:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    }
-
-    /* --- HERO SECTION ANIMATION --- */
-    .hero-content h1 {
-      font-size: 3rem;
+    .app-section h2 {
+      text-align: center;
       font-weight: 800;
-      background: linear-gradient(90deg, #3498db, #2ecc71);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #198754;
+      margin-bottom: 2rem;
+    }
+
+    /* --- About / Privacy-specific tweaks --- */
+    .about-section {
+      background: linear-gradient(180deg, rgba(46, 204, 113, 0.03), rgba(46, 204, 113, 0.01));
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .about-body {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 1fr;
+      align-items: start;
+      color: #2f3b45;
+      font-size: 1.03rem;
+    }
+
+    /* Make paragraphs easier to read on wide screens */
+    .about-body p {
       margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-      animation: gradientShift 5s ease-in-out infinite alternate;
+      line-height: 1.7;
+      text-align: left;
     }
 
-    @keyframes gradientShift {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
+    /* Privacy style */
+    .privacy-section {
+      background: linear-gradient(180deg, rgba(52, 152, 219, 0.03), rgba(52, 152, 219, 0.01));
+      padding-top: 4rem;
+      padding-bottom: 4rem;
     }
 
-    .hero-content .lead {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: #2c3e50;
-      margin-bottom: 1.2rem;
-      animation: fadeInUp 1s ease forwards;
+    .privacy-card h1,
+    .privacy-card h2 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-weight: 700;
+      color: #23384a;
     }
 
-    .hero-content p {
-      font-size: 1.05rem;
+    .privacy-card p,
+    .privacy-card ul {
       color: #34495e;
-      line-height: 1.65;
-      animation: fadeInUp 1.2s ease forwards;
-    }
-
-    .hero-content p strong {
-      color: #3498db;
-      font-weight: 700;
-    }
-
-    /* --- FADE IN ANIMATION --- */
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* --- BUTTONS FLASH & GLOW --- */
-    .btn-primary,
-    .btn-success,
-    .btn-warning,
-    .btn-danger,
-    .btn-info {
-      font-weight: 700;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary:hover,
-    .btn-success:hover,
-    .btn-warning:hover,
-    .btn-danger:hover,
-    .btn-info:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 0 0 12px rgba(255, 255, 255, 0.2);
-    }
-
-    /* Add subtle gradient animations to main buttons */
-    .btn-primary {
-      background: linear-gradient(90deg, #3498db, #2ecc71);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(90deg, #2ecc71, #3498db);
-    }
-
-    .btn-success {
-      background: linear-gradient(90deg, #28a745, #20c997);
-    }
-
-    .btn-success:hover {
-      background: linear-gradient(90deg, #20c997, #28a745);
-    }
-
-    /* --- OUTPUT SECTION INTERACTIVITY --- */
-    #output-section {
-      background: #fff;
-      border-radius: 10px;
-      padding: 1rem;
       font-size: 1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      line-height: 1.6;
     }
 
-    #output-section:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    .privacy-card ul {
+      padding-left: 1.1rem;
+      margin-bottom: 1rem;
     }
 
-    /* --- LOGO ANIMATION --- */
-    .img-fluid.max-logo {
-      max-width: 400px;
-      animation: floatLogo 4s ease-in-out infinite alternate;
+    .privacy-note {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
     }
 
-    @keyframes floatLogo {
-      0% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-10px);
-      }
-
-      100% {
-        transform: translateY(0px);
-      }
+    /* Small utilities */
+    .muted {
+      color: var(--muted);
     }
 
-    /* --- MOBILE RESPONSIVENESS --- */
-    @media (max-width: 768px) {
-      .hero-content h1 {
-        font-size: 2.2rem;
+    /* Responsive layout for about: two-column on desktop */
+    @media (min-width: 992px) {
+      .about-body {
+        grid-template-columns: 1fr 420px;
+        align-items: start;
       }
 
-      .hero-content .lead {
-        font-size: 1.2rem;
+      .about-side {
+        padding-left: 1.5rem;
       }
 
-      #output-section {
-        font-size: 0.95rem;
+      .about-side .section-card {
+        padding: 1.5rem;
       }
     }
 
-    /* Ensure How It Works section doesn’t overlap App Section */
-.container > section.p-4.bg-light {
-  margin-top: 2rem; /* space above */
-  margin-bottom: 2rem; /* optional space below */
-}
+    /* list styling */
+    .nice-list li {
+      margin-bottom: 0.7rem;
+    }
   </style>
 </head>
 
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Buddy Matcher</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li>
-          <li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
-        </ul>
+
+  <!-- HEADER IMAGE (FULL WIDTH) -->
+  <section class="p-0 m-0">
+    <img src="ChatGPT Image Oct 5, 2025, 06_22_40 PM.png" alt="Buddy Matcher header image" class="hero-image">
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- INTRO TEXT SECTION -->
+  <section class="intro">
+    <div class="section-wrap">
+      <div class="section-card">
+        <h1 class="section-title">The Ultimate Buddy Generator</h1>
+        <p class="section-sub">Quickly and fairly create random buddy pairs or groups — perfect for classrooms, events,
+          and team activities.</p>
+        <p class="muted" style="text-align:center; margin-bottom:0;">New! 🎉 You can paste entire columns from
+          spreadsheets
+          directly into the input</p>
       </div>
     </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="container-fluid py-4">
-    <div class="container" style="max-width: 1200px;">
-      <!-- Hero Section -->
-      <section class="hero mb-5">
-        <img src="buddy_logo.png" alt="Buddy Matcher logo" class="img-fluid max-logo">
-        <div class="hero-content">
-          <h1 class="text-primary mb-3">The Ultimate Buddy Generator</h1>
-          <p class="lead text-center">
-  Do you need to match people together quickly and fairly—into pairs or larger groups? <strong>Buddy Matcher</strong> is a free online tool for teachers, team leaders, event hosts, and anyone running group activities. It instantly generates random groups of any size from your list of names, and handles leftover names automatically so no one is left out. <em>New! 🎉 You can now copy entire columns of names straight from your spreadsheet. Just paste them into the input box below and see your groups generated instantly!</em>
-</p>
-
-
-        </div>
-      </section>
-
-      <!-- App Section -->
-      <section class="bg-white p-4 rounded shadow-sm mb-5">
-        <div class="mb-3">
-          <label for="name-input" class="form-label">Buddy's Name:</label>
-          <input id="name-input" class="form-control" type="text" placeholder="Type name here" />
-        </div>
-        <div class="mb-3">
-          <label for="group-size" class="form-label">Select group size:</label>
-          <select id="group-size" class="form-select">
-            <option value="2" selected>2 (default pairs)</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-        </div>
-
-        
-        <div class="d-grid gap-2 mb-4">
-          <button id="add-button" class="btn btn-primary" type="button">➕ Add Buddy</button>
-          <button id="buttonGenerator" class="btn btn-success">Generate Buddy Match</button>
-          <button id="delete-button" class="btn btn-danger" type="button">🗑 Delete Buddy</button>
-        </div>
-
-        <div id="output-section" class="fade-in mb-4">
-          <div id="names-list"></div>
-          <div id="matches"></div>
-        </div>
-
-        <dialog id="confirm-deleteAll-dialog">
-  <p>Are you sure you want to delete all buddies?</p>
-  <menu>
-    <button id="yesDelete-Modal-btn">Yes, delete all</button>
-    <button onclick="document.getElementById('confirm-deleteAll-dialog').close()">Cancel</button>
-  </menu>
-</dialog>
-
-
-        <div class="d-flex flex-wrap justify-content-center gap-3">
-                    <button id="reset" class="btn btn-warning">Reset</button>
-          <button id="delete-all" class="btn btn-danger">Delete all</button>
-          <button id="show-names" class="btn btn-info">Show Available Names</button>
-        </div>
-      </section>
-    </div>
-
-<!-- How It Works Section -->
-<div class="container" style="max-width:1200px; margin-top: 2rem;">
-  <section class="p-4 bg-light rounded shadow-sm">
-    <h2 class="mb-3 text-center text-success">How Buddy Matcher Works</h2>
-    <p class="lead text-center mb-4">
-      Follow these simple steps to create random, fair buddy groups in seconds:
-    </p>
-    <ul class="ps-4">
-      <li><strong>Enter Participants:</strong> Type or paste the names of all participants into the input box above. You can copy entire columns straight from your spreadsheet!</li>
-      <li><strong>Select Group Size:</strong> Choose the number of people per group using the dropdown menu. Buddy Matcher will handle leftover participants automatically.</li>
-      <li><strong>Generate Matches:</strong> Click the <span class="btn btn-success btn-sm">Generate Buddy Match</span> button. Your random groups will appear instantly in the output box below.</li>
-      <li><strong>Copy & Share:</strong> Easily copy your generated groups or share them with your team. No participant is left out.</li>
-    </ul>
-    <p class="mt-3 text-center text-muted">
-      Quick, fair, and free—Buddy Matcher makes organizing groups effortless!
-    </p>
   </section>
-</div>
 
+  <div class="divider"></div>
 
-  </main>
+  <!-- APP SECTION -->
+  <section class="app-section">
+    <div class="section-wrap">
+      <h2>Try Buddy Matcher Now</h2>
 
+      <div class="container" style="max-width: 900px;">
+        <div class="section-card">
+          <div class="mb-3">
+            <label for="name-input" class="form-label">Buddy's Name:</label>
+            <input id="name-input" class="form-control" type="text" placeholder="Type name here" />
+          </div>
 
+          <div class="mb-3">
+            <label for="group-size" class="form-label">Select group size:</label>
+            <select id="group-size" class="form-select">
+              <option value="2" selected>2 (default pairs)</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
 
-  <!-- Buy Me a Coffee -->
-  <div class="text-center my-4">
-    <a href="https://buymeacoffee.com/buddyup" target="_blank">
-      <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" aria-label="Support Buddy Matcher by buying a coffee" alt="Buy Me a Coffee" aria-label="" aria-required=""
-        style="height:60px; width:auto;">
-    </a>
-    <p class="text-center text-muted mt-2">Support Buddy Matcher—every coffee helps keep it free!</p>
+          <div class="d-grid gap-2 mb-4">
+            <button id="add-button" class="btn btn-primary" type="button">➕ Add Buddy</button>
+            <button id="buttonGenerator" class="btn btn-success">Generate Buddy Match</button>
+            <button id="delete-button" class="btn btn-danger" type="button">🗑 Delete Buddy</button>
+          </div>
 
-  </div>
+          <div id="output-section" class="fade-in mb-4">
+            <div id="names-list"></div>
+            <div id="matches"></div>
+          </div>
 
-  <footer>
-    Made with 💻 in spare time by Erkan Said
-  </footer>
+          <dialog id="confirm-deleteAll-dialog">
+            <p>Are you sure you want to delete all buddies?</p>
+            <menu>
+              <button id="yesDelete-Modal-btn">Yes, delete all</button>
+              <button onclick="document.getElementById('confirm-deleteAll-dialog').close()">Cancel</button>
+            </menu>
+          </dialog>
 
-  
-  <!-- Bootstrap JS -->
+          <div class="d-flex flex-wrap justify-content-center gap-3">
+            <button id="reset" class="btn btn-warning">Reset</button>
+            <button id="delete-all" class="btn btn-danger">Delete all</button>
+            <button id="show-names" class="btn btn-info">Show Available Names</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- HOW IT WORKS SECTION -->
+  <section class="how-section">
+    <div class="section-wrap">
+      <div class="section-card">
+        <h2 class="section-title">How Buddy Matcher Works</h2>
+        <p class="section-sub">Follow these simple steps to create random, fair buddy groups in seconds:</p>
+
+        <div class="container" style="max-width:900px;">
+          <ul class="nice-list">
+            <li><strong>Enter Participants:</strong> Type or paste names into the input box. You can paste entire
+              columns
+              from spreadsheets.</li>
+            <li><strong>Select Group Size:</strong> Choose your desired group size. Buddy Matcher will handle leftovers
+              for you.</li>
+            <li><strong>Generate Matches:</strong> Click the <span class="btn btn-success btn-sm">Generate Buddy
+                Match</span> button to instantly see your groups.</li>
+            <li><strong>Copy & Share:</strong> Copy your generated groups or share them easily. No one is left out.</li>
+          </ul>
+          <p class="muted text-center" style="margin-top:1rem;">Quick, fair, and free—Buddy Matcher makes organising
+            groups effortless!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT SECTION (polished) -->
+  <section class="about-section">
+    <div class="section-wrap">
+      <div class="about-grid section-card" style="display:block;">
+        <h2 class="section-title">About Buddy Matcher</h2>
+
+        <div class="about-body" style="margin-top:1rem;">
+          <!-- main text -->
+          <div>
+            <p>
+              I’m a dad of two young children with a full-time job that keeps me busy from morning to night. Yet, in the
+              evenings after the kids are asleep, I carve out time to teach myself app development—one line of code at a
+              time. I started this journey to escape the rat race and build a life where I’m more in control of my time
+              and
+              able to focus on what truly matters: family, friends, and all the things I love.
+            </p>
+
+            <p>
+              This app was born from a simple idea I had while watching a colleague draw names from a hat during a team
+              building day. I thought, “There’s got to be a quicker, more fun way of doing that!” and that's when
+              Buddy Matcher was born. It’s my first step towards creating tools that make life easier and more enjoyable for others.
+              Whatever you use it for, I hope you enjoy using it as much as I enjoyed making it!
+            </p>
+          </div>
+
+          <!-- side / quick facts card -->
+          <aside class="about-side">
+            <div class="section-card" style="background:linear-gradient(180deg, #fff, #fbfffb);">
+              <h4 style="margin-top:0; margin-bottom:0.5rem; color:var(--accent-2);">Quick Facts</h4>
+              <ul style="padding-left:1rem; margin-bottom:0.5rem; color:#2f3b45;">
+                <li>No sign-up required</li>
+                <li>Runs locally in your browser</li>
+                <li>Works with copy-pasted spreadsheet columns</li>
+                <li>Designed for classrooms & events</li>
+              </ul>
+              <p class="privacy-note">Made with ❤️ and built in spare time to make group activities easier.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PRIVACY SECTION (polished) -->
+  <section class="privacy-section">
+    <div class="section-wrap">
+      <div class="section-card privacy-card">
+        <h1 class="section-title" style="font-size:1.8rem; margin-bottom:0.25rem;">Privacy Policy</h1>
+
+        <p>At Buddy Matcher (www.buddymatcher.co.uk), your privacy is important to us. This Privacy Policy explains what
+          information we collect, how we use it, and your rights.</p>
+
+        <h2>Information We Collect</h2>
+        <p>We may collect personal information you provide (such as your name or email if you contact us) and
+          non-personal
+          data such as browser type, device, and usage patterns through cookies.</p>
+
+        <h2>Use of Cookies</h2>
+        <p>Buddy Matcher uses cookies to improve your experience, analyse traffic, and show personalised ads.
+          Third-party
+          vendors, including Google, use cookies to serve ads based on your previous visits to this site or other
+          websites.</p>
+
+        <p>Google’s use of advertising cookies enables it and its partners to serve ads to you based on your visit to
+          this
+          site and/or other sites on the Internet. You can opt out of personalised advertising by visiting <a
+            href="https://www.google.com/settings/ads">Google Ads Settings</a>.</p>
+
+        <h2>How We Use Your Information</h2>
+        <ul>
+          <li>To provide and improve our services.</li>
+          <li>To display relevant advertising.</li>
+          <li>To communicate with you if you reach out via our contact form.</li>
+        </ul>
+
+        <h2>Your Choices</h2>
+        <p>You can disable cookies in your browser settings. Please note that some features of our site may not function
+          properly if cookies are disabled.</p>
+
+        <h2>Changes</h2>
+        <p>We may update this Privacy Policy from time to time. The latest version will always be available on this
+          page.
+        </p>
+
+        <h2>Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us at <a
+            href="mailto:erkan.said22@gmail.com">buddyup@buddymatcher.com</a>.</p>
+
+        <hr style="margin:1.25rem 0; border-color: rgba(16,24,40,0.06);">
+
+        <h2>Privacy & Disclaimer</h2>
+        <p>Buddy Matcher does not collect or store any personal information. All names entered are processed locally in
+          your
+          browser and are never sent to our servers. We use Google AdSense to show ads and help keep this tool free.</p>
+        <p>By using this site, you agree that any generated matches are for fun and practical use only. We make no
+          guarantees about outcomes or randomisation fairness.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- BUY ME A COFFEE -->
+  <section class="text-center py-5 coffee-section" style="background-color:#fdf5d5;">
+    <div class="section-wrap">
+      <div class="section-card">
+        <a href="https://buymeacoffee.com/buddyup" target="_blank" style="display:inline-block;">
+          <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee"
+            style="height:60px; width:auto;">
+        </a>
+        <p style="margin-top:0.75rem; font-weight:600; color:#2c3e50;">Support Buddy Matcher — every coffee helps keep
+          it
+          free!</p>
+      </div>
+    </div>
+  </section>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Your buddy app JS -->
   <script src="buddy.js"></script>
-
-  <!-- Auto-active navbar link -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const links = document.querySelectorAll('.navbar .nav-link');
-      let current = location.pathname.split('/').pop() || 'index.html';
-      links.forEach(a => {
-        const href = a.getAttribute('href') || '';
-        const normHref = (href === '/' || href === '') ? 'index.html' : href.replace(/^.*[\\/]/, '');
-        a.classList.toggle('active', normHref === current);
-      });
-    });
-  </script>
 </body>
 
 </html>
