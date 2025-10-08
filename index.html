@@ -30,174 +30,195 @@
 
   <style>
     /* --- Base --- */
-    :root {
-      --max-inner-width: 1100px;
-      --accent-1: #3498db;
-      --accent-2: #2ecc71;
-      --muted: #6c7a89;
-      --card-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
-    }
+:root {
+  --max-inner-width: 1100px;
+  --accent-1: #3498db;
+  --accent-2: #2ecc71;
+  --accent-3: #f1c40f;
+  --muted: #6c7a89;
+  --card-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+  --bg-light: #f8f9fa;
+  --bg-section-light: #ffffff;
+  --text-dark: #34495e;
+  --text-heading: #23384a;
+  --btn-radius: 8px;
+  --section-padding: 4rem 1rem;
+}
 
-    body {
-      margin: 0;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background-color: #f8f9fa;
-      color: #34495e;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    section {
-      width: 100%;
-      padding: 4rem 1rem;
-    }
+section {
+  width: 100%;
+  padding: var(--section-padding);
+}
 
-    .divider {
-      height: 4px;
-      background: linear-gradient(to right, var(--accent-2), var(--accent-1));
-      margin: 0;
-    }
+.divider {
+  height: 4px;
+  background: linear-gradient(to right, var(--accent-2), var(--accent-1));
+  margin: 0;
+}
 
-    /* --- Hero image --- */
-    .hero-image {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-    }
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
 
-    /* --- Consistent content card (used in sections) --- */
-    .section-wrap {
-      max-width: var(--max-inner-width);
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
+.section-wrap {
+  max-width: var(--max-inner-width);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
 
-    .section-card {
-      background: #fff;
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: var(--card-shadow);
-      border: 1px solid rgba(16, 24, 40, 0.04);
-    }
+.section-card {
+  background: var(--bg-section-light);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(16, 24, 40, 0.06);
+}
 
-    .section-title {
-      font-size: 1.9rem;
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.section-title {
+  font-size: 1.9rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-    .section-sub {
-      text-align: center;
-      color: #2c3e50;
-      font-weight: 600;
-      margin-bottom: 1.25rem;
-      font-size: 1.05rem;
-    }
+.section-sub {
+  text-align: center;
+  color: var(--text-dark);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  font-size: 1.05rem;
+}
 
-    /* --- App page specifics (kept similar) --- */
-    .app-section {
-      background-color: #f0f9f4;
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-    }
+.app-section {
+  background-color: #f0f9f4;
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
 
-    .app-section h2 {
-      text-align: center;
-      font-weight: 800;
-      color: #198754;
-      margin-bottom: 2rem;
-    }
+.app-section h2 {
+  text-align: center;
+  font-weight: 800;
+  color: var(--accent-2);
+  margin-bottom: 2rem;
+}
 
-    /* --- About / Privacy-specific tweaks --- */
-    .about-section {
-      background: linear-gradient(180deg, rgba(46, 204, 113, 0.03), rgba(46, 204, 113, 0.01));
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-    }
+.about-section {
+  background: linear-gradient(180deg, rgba(46, 204, 113, 0.03), rgba(46, 204, 113, 0.01));
+}
 
-    .about-body {
-      display: grid;
-      gap: 1.25rem;
-      grid-template-columns: 1fr;
-      align-items: start;
-      color: #2f3b45;
-      font-size: 1.03rem;
-    }
+.about-body {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+  color: var(--text-dark);
+  font-size: 1.03rem;
+}
 
-    /* Make paragraphs easier to read on wide screens */
-    .about-body p {
-      margin-bottom: 1rem;
-      line-height: 1.7;
-      text-align: left;
-    }
+.about-body p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
 
-    /* Privacy style */
-    .privacy-section {
-      background: linear-gradient(180deg, rgba(52, 152, 219, 0.03), rgba(52, 152, 219, 0.01));
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-    }
+.about-side .section-card {
+  padding: 1.5rem;
+  background: linear-gradient(180deg, #fff, #fbfffb);
+}
 
-    .privacy-card h1,
-    .privacy-card h2 {
-      margin-top: 0;
-      margin-bottom: 0.75rem;
-      font-weight: 700;
-      color: #23384a;
-    }
+.privacy-section {
+  background: linear-gradient(180deg, rgba(52, 152, 219, 0.03), rgba(52, 152, 219, 0.01));
+}
 
-    .privacy-card p,
-    .privacy-card ul {
-      color: #34495e;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
+.privacy-card h1,
+.privacy-card h2 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
 
-    .privacy-card ul {
-      padding-left: 1.1rem;
-      margin-bottom: 1rem;
-    }
+.privacy-card p,
+.privacy-card ul {
+  color: var(--text-dark);
+  font-size: 1rem;
+  line-height: 1.6;
+}
 
-    .privacy-note {
-      font-size: 0.95rem;
-      color: var(--muted);
-      margin-top: 0.75rem;
-    }
+.privacy-card ul {
+  padding-left: 1.25rem;
+  margin-bottom: 1rem;
+}
 
-    /* Small utilities */
-    .muted {
-      color: var(--muted);
-    }
+.privacy-note {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-top: 0.75rem;
+}
 
-    /* Responsive layout for about: two-column on desktop */
-    @media (min-width: 992px) {
-      .about-body {
-        grid-template-columns: 1fr 420px;
-        align-items: start;
-      }
+.muted {
+  color: var(--muted);
+}
 
-      .about-side {
-        padding-left: 1.5rem;
-      }
+.nice-list li {
+  margin-bottom: 0.7rem;
+}
 
-      .about-side .section-card {
-        padding: 1.5rem;
-      }
-    }
+.btn {
+  border-radius: var(--btn-radius);
+  font-weight: 600;
+}
 
-    /* list styling */
-    .nice-list li {
-      margin-bottom: 0.7rem;
-    }
-  </style>
+section h3, section h4, section h5, section h6 {
+  color: var(--text-heading);
+}
+
+@media (min-width: 992px) {
+  .about-body {
+    grid-template-columns: 1fr 420px;
+  }
+
+  .about-side {
+    padding-left: 1.5rem;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.row.g-4 > .col-md-6 {
+  display: flex;
+  flex-direction: column;
+}
+
+section#how-i-built-it,
+section#get-involved,
+section#media,
+section#testimonials {
+  background-color: #fdfdfd;
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+</style>
+
 </head>
 
 <body>
@@ -306,6 +327,149 @@
 
   <div class="divider"></div>
 
+  <!-- FEATURES / USE CASES / HOW TO USE / FAQ / BENEFITS / COMMUNITY -->
+<section class="section-wrap mt-5 mb-5">
+  <div class="section-card">
+
+    <h2 class="section-title">What is Buddy Matcher?</h2>
+    <p class="section-sub">
+      Buddy Matcher is a free online tool that helps you create random pairs, trios, or groups from any list of names.
+      Whether you're organising a classroom activity, a team event, or a social get-together, Buddy Matcher makes it quick,
+      fair, and fun to match people up.
+    </p>
+    <p>
+      No more scribbling names on paper or fiddling with spreadsheets. With Buddy Matcher, everything happens instantly
+      in your browser — simply enter the names, select a group size, and click generate. The results appear right away,
+      beautifully organised and ready to use.
+    </p>
+
+    <h3 class="mt-5">Why Buddy Matcher Exists</h3>
+    <p>
+      We all know how awkward and time-consuming it can be to create random teams or partnerships. Some people get picked last,
+      others are paired with the same people every time, and often the process feels anything but random. Buddy Matcher fixes that
+      by ensuring that everyone gets a fair shot — and that the experience of grouping people feels light, joyful, and effortless.
+    </p>
+    <p>
+      The app is built with simplicity and privacy in mind. You don’t need to create an account, sign in, or share your data.
+      Everything runs locally in your browser, meaning your lists and results never leave your device.
+    </p>
+
+    <h3 class="mt-5">Key Features</h3>
+    <ul>
+      <li><strong>Instant Matching:</strong> Generate random groups in one click — no waiting, no refreshes.</li>
+      <li><strong>Flexible Group Sizes:</strong> Choose pairs, trios, or any custom number of people per group.</li>
+      <li><strong>Smart Distribution:</strong> Automatically adjusts when the numbers don’t divide evenly.</li>
+      <li><strong>Local Storage:</strong> Your lists are saved automatically, even if you close the page.</li>
+      <li><strong>Beautiful Design:</strong> Simple, clean interface that works smoothly on both desktop and mobile.</li>
+      <li><strong>Privacy-First:</strong> No tracking, no sign-ups, no cloud storage — everything happens on your device.</li>
+    </ul>
+
+    <h3 class="mt-5">Popular Ways to Use Buddy Matcher</h3>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <h5>🎓 In the Classroom</h5>
+        <p>Teachers use Buddy Matcher to split students into groups for science projects, reading pairs, debates, or
+        quick team quizzes. It keeps things fair and saves valuable lesson time.</p>
+      </div>
+      <div class="col-md-6">
+        <h5>🏢 At Work</h5>
+        <p>Managers and HR teams use it to randomly assign colleagues to discussion groups, coffee-chat partners, or
+        cross-team collaborations. It’s a great way to build stronger connections in the workplace.</p>
+      </div>
+      <div class="col-md-6">
+        <h5>🎉 Events and Parties</h5>
+        <p>Event organisers love using Buddy Matcher to quickly create fun, mixed groups for games, team-building, or
+        icebreakers — it’s especially handy for Secret Santa or quiz nights.</p>
+      </div>
+      <div class="col-md-6">
+        <h5>👨‍👩‍👧‍👦 Family and Friends</h5>
+        <p>Use it for board games, holiday games, or family challenges. It’s an easy way to keep things spontaneous and
+        make sure everyone gets a fair turn.</p>
+      </div>
+      <div class="col-md-6">
+        <h5>🎮 Online Communities</h5>
+        <p>Moderators use Buddy Matcher to form random teams for online games, Discord challenges, or virtual study groups.</p>
+      </div>
+      <div class="col-md-6">
+        <h5>💞 Secret Santa Mode</h5>
+        <p>At Christmas, Buddy Matcher doubles as a fun Secret Santa tool — randomly matching names while keeping it fair
+        and simple. You can even customise the icon between matches to suit the season.</p>
+      </div>
+    </div>
+
+    <h3 class="mt-5">How to Use Buddy Matcher</h3>
+    <ol>
+      <li>Enter or paste your list of names — you can type or copy them from Excel, Google Sheets, or Notes.</li>
+      <li>Choose your group size (pairs, trios, or custom).</li>
+      <li>Click the <strong>Generate</strong> button — your randomised groups appear instantly.</li>
+      <li>Review, share, or screenshot the results to send to others.</li>
+      <li>Need to start again? Just reset the list or clear all names.</li>
+    </ol>
+    <p>
+      That’s it. No sign-ups, no setup, no hassle — just simple, instant results.
+    </p>
+
+    <h3 class="mt-5">Top Benefits of Using Buddy Matcher</h3>
+    <ul>
+      <li><strong>Fairness Guaranteed:</strong> Each match is freshly randomised every time — no hidden patterns.</li>
+      <li><strong>Time-Saver:</strong> Create pairings in seconds, not minutes.</li>
+      <li><strong>Customisable:</strong> Change icons, group sizes, and match styles to suit your event or mood.</li>
+      <li><strong>Engaging Visuals:</strong> Smooth animations and colourful cards make it enjoyable to use.</li>
+      <li><strong>Accessible:</strong> Works in any modern browser, including phones and tablets.</li>
+      <li><strong>Lightweight:</strong> Loads instantly — even on slow connections.</li>
+    </ul>
+
+    <h3 class="mt-5">User Feedback</h3>
+    <p>
+      “I used Buddy Matcher for a training day with 30 staff and it worked perfectly. Everyone loved how quick and fun it was!”
+      — <em>Sarah, HR Manager</em>
+    </p>
+    <p>
+      “Our kids’ club uses it weekly to mix up activity teams. So much easier than drawing names from a hat.”
+      — <em>Tom, Youth Leader</em>
+    </p>
+
+    <h3 class="mt-5">Frequently Asked Questions</h3>
+    <p><strong>Can I paste from Excel or Google Sheets?</strong><br>
+      Yes — just copy your list of names (one per line or cell) and paste directly into the app.
+    </p>
+    <p><strong>What if my group size doesn’t divide evenly?</strong><br>
+      Buddy Matcher automatically balances the last few names, so you won’t end up with any lonely singles.
+    </p>
+    <p><strong>Do I need to create an account?</strong><br>
+      No accounts, no emails, no passwords — everything works straight from your browser.
+    </p>
+    <p><strong>Is it really free?</strong><br>
+      Yes. Buddy Matcher is completely free to use and always will be. You might see ads to help support the site’s hosting costs.
+    </p>
+    <p><strong>Does it work offline?</strong><br>
+      As long as the page is loaded, most features will still work offline since all data is stored locally in your browser.
+    </p>
+
+    <!-- TESTIMONIALS -->
+<section id="testimonials" class="py-5">
+  <div class="container text-center">
+    <h2>What People Are Saying</h2>
+    <p>"Absolutely love how easy this is to use – saved me so much time during our work event!" – <em>Sarah, HR Manager</em></p>
+    <p>"Perfect for classroom pairings. My students actually look forward to seeing who they’ll get!" – <em>Mr. Turner, Teacher</em></p>
+    <p>"We used Buddy Matcher for our pub quiz night and it worked like a charm. Simple and fun!" – <em>Jake, Quiz Host</em></p>
+  </div>
+</section>
+
+    <h3 class="mt-5">Our Mission</h3>
+    <p>
+      Buddy Matcher was built for busy teachers, organisers, and community leaders who just want an easy way to bring people together.
+      Behind every name you type is a person waiting to connect — and that’s what this app celebrates: simple, happy human connections.
+    </p>
+    <p>
+      We believe small tools like this can make a big difference. They help people laugh, collaborate, and bond in ways
+      that make life just a little more joyful.
+    </p>
+
+  </div>
+</section>
+
+
   <!-- ABOUT SECTION (polished) -->
   <section class="about-section">
     <div class="section-wrap">
@@ -351,6 +515,37 @@
   </section>
 
   <div class="divider"></div>
+
+  <!-- HOW I BUILT IT -->
+<section id="how-i-built-it" class="py-5 bg-light text-center">
+  <div class="container">
+    <h2>How I Built Buddy Matcher</h2>
+    <p>Buddy Matcher started as a small side project in the evenings after my kids went to bed. I wanted to learn how to build something useful with my own two hands — a simple, fun web app that solved a real problem. I began with the basics: HTML, CSS, and a lot of trial and error. Over time, I added JavaScript features, Bootstrap for styling, and eventually made it fully mobile-friendly.</p>
+    <p>Each new feature came with its own challenge — from randomising the buddy pairs to making the layout look great on every device. I spent countless nights debugging and refining until everything just worked. It’s still a work in progress, but that’s part of the fun. I’ve learned that even small, independent creators can make tools that people genuinely enjoy using.</p>
+    <p>If you’re someone who’s curious about coding or thinking of starting your own project, my advice is simple: start small, stay consistent, and keep improving. You don’t need to be an expert to build something meaningful — you just need the will to begin.</p>
+  </div>
+</section>
+
+<!-- GET INVOLVED / IN THE MEDIA -->
+<section id="get-involved" class="py-5 text-center">
+  <div class="container">
+    <h2>Get Involved</h2>
+    <p>Buddy Matcher is growing thanks to word of mouth and people like you who share it with friends, colleagues, and communities. If you’ve enjoyed using it, please help spread the word — every share, mention, or bit of feedback makes a real difference.</p>
+    <p>Do you write about technology, productivity, or fun web tools? I’d love to hear from you. Whether you’d like to feature Buddy Matcher in a blog, article, or social media post, or even suggest a new feature, your input is always welcome.</p>
+    <p>If you want to collaborate, offer ideas, or simply say hi — <a href="mailto:hello@buddymatcher.co.uk">email me</a> anytime.</p>
+  </div>
+</section>
+
+<!-- IN THE MEDIA -->
+<section id="media" class="py-5 bg-light text-center">
+  <div class="section-wrap>
+    <h2>In the Media</h2>
+    <p>Buddy Matcher has started to appear in online discussions and community posts around the web. Teachers have shared it as a go-to classroom tool, small businesses use it for team mixers, and families use it for party games and Secret Santa draws.</p>
+    <p>We’re proud to be part of a growing community of simple, useful tools that bring people together — one random match at a time.</p>
+    <p>If you’d like to feature Buddy Matcher in your publication, article, or blog, please reach out. We’re always open to sharing the story behind the app and what’s next on our roadmap.</p>
+  </div>
+</section>
+
 
   <!-- PRIVACY SECTION (polished) -->
   <section class="privacy-section">
