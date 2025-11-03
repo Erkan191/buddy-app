@@ -244,76 +244,78 @@
     }
 
     /* Modern Buddy Matcher Navbar Style */
-.navbar {
-  background: linear-gradient(90deg, #4caf50, #2e7d32); /* soft green gradient */
-  font-family: "Poppins", "Segoe UI", Roboto, sans-serif;
-  font-weight: 500;
-  letter-spacing: 0.3px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
+    .navbar {
+      background: linear-gradient(90deg, #4caf50, #2e7d32);
+      /* soft green gradient */
+      font-family: "Poppins", "Segoe UI", Roboto, sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
 
-.navbar-brand {
-  color: #fff !important;
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+    .navbar-brand {
+      color: #fff !important;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
 
-.navbar-brand:hover {
-  color: #c8facc !important;
-}
+    .navbar-brand:hover {
+      color: #c8facc !important;
+    }
 
-.navbar-nav .nav-link {
-  color: #e8f5e9 !important;
-  font-size: 1rem;
-  transition: color 0.2s ease, transform 0.2s ease;
-  padding: 0.6rem 1rem;
-}
+    .navbar-nav .nav-link {
+      color: #e8f5e9 !important;
+      font-size: 1rem;
+      transition: color 0.2s ease, transform 0.2s ease;
+      padding: 0.6rem 1rem;
+    }
 
-.navbar-nav .nav-link:hover {
-  color: #ffffff !important;
-  transform: translateY(-1px);
-}
+    .navbar-nav .nav-link:hover {
+      color: #ffffff !important;
+      transform: translateY(-1px);
+    }
 
-.navbar-toggler {
-  border: none;
-  background: none;
-}
+    .navbar-toggler {
+      border: none;
+      background: none;
+    }
 
-.navbar-toggler-icon {
-  filter: brightness(0) invert(1); /* makes hamburger icon white */
-}
+    .navbar-toggler-icon {
+      filter: brightness(0) invert(1);
+      /* makes hamburger icon white */
+    }
 
-@media (max-width: 576px) {
-  .navbar-nav .nav-link {
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-}
-
+    @media (max-width: 576px) {
+      .navbar-nav .nav-link {
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    }
   </style>
 </head>
 
 <body>
- <nav class="navbar navbar-expand-md bg-light sticky-top" style="background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(6px); font-family: 'Poppins', sans-serif; font-size: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-  <div class="container-fluid">
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-md bg-light sticky-top"
+    style="background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(6px); font-family: 'Poppins', sans-serif; font-size: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-      <a class="nav-link px-3 text-dark fw-medium" href="#app">Buddy Matcher App</a>
-      <a class="nav-link px-3 text-dark fw-medium" href="#features">Key Features</a>
-      <a class="nav-link px-3 text-dark fw-medium" href="#when">When to Use</a>
-      <a class="nav-link px-3 text-dark fw-medium" href="#faq">FAQ</a>
-      <a class="nav-link px-3 text-dark fw-medium" href="#about">About</a>
-      <a class="nav-link px-3 text-dark fw-medium" href="#privacy">Privacy</a>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <a class="nav-link px-3 text-dark fw-medium" href="#app">Buddy Matcher App</a>
+        <a class="nav-link px-3 text-dark fw-medium" href="#features">Key Features</a>
+        <a class="nav-link px-3 text-dark fw-medium" href="#when">When to Use</a>
+        <a class="nav-link px-3 text-dark fw-medium" href="#faq">FAQ</a>
+        <a class="nav-link px-3 text-dark fw-medium" href="#about">About</a>
+        <a class="nav-link px-3 text-dark fw-medium" href="#privacy">Privacy</a>
+      </div>
     </div>
-  </div>
-</nav>
-<!-- Add this in your <head> if not already included -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  </nav>
+  <!-- Add this in your <head> if not already included -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
 
 
@@ -350,7 +352,8 @@
     <div class=" section-card">
       <div class="mb-3">
         <label for="name-input" class="form-label"><strong>Buddy's Name:</strong></label>
-        <input id="name-input" class="form-control" type="text" placeholder="Type name here" />
+        <textarea id="name-input" class="form-control" placeholder="Enter buddy name(s)" rows="1"
+          style="resize:none; overflow:hidden;"></textarea>
       </div>
 
       <div class="mb-3">
@@ -380,6 +383,13 @@
         <menu>
           <button id="yesDelete-Modal-btn">Yes, delete all</button>
           <button onclick="document.getElementById('confirm-deleteAll-dialog').close()">Cancel</button>
+        </menu>
+      </dialog>
+
+      <dialog id="enter-buddy-dialog">
+        <p>Please enter a buddy name before hitting that generate button!</p>
+        <menu>
+          <button onclick="document.getElementById('confirm-close-enter-name-dialog').close()">OK</button>
         </menu>
       </dialog>
 
@@ -715,9 +725,9 @@
   </section>
 
   <section class="section-wrap mt-5 mb-5">
-  <div class="section-card">
-    <div class="section-sub">
-      <h2 class="sub-headings">In the Media</h2>
+    <div class="section-card">
+      <div class="section-sub">
+        <h2 class="sub-headings">In the Media</h2>
         <p>Buddy Matcher has started to appear in online discussions and community posts around the web. Teachers have
           shared it as a go-to classroom tool, small businesses use it for team mixers, and families use it for party
           games and Secret Santa draws.</p>
@@ -730,67 +740,67 @@
   </section>
 
 
-    <!-- PRIVACY SECTION -->
-    <section class=" section-card" id="privacy">
-        <h1 class="sub-headings">Privacy Policy</h1>
-        <div class="section-sub">
-          <p>At Buddy Matcher (www.buddymatcher.co.uk), your privacy is important to us. This Privacy Policy
-            explains
-            what
-            information we collect, how we use it, and your rights.</p><br>
+  <!-- PRIVACY SECTION -->
+  <section class=" section-card" id="privacy">
+    <h1 class="sub-headings">Privacy Policy</h1>
+    <div class="section-sub">
+      <p>At Buddy Matcher (www.buddymatcher.co.uk), your privacy is important to us. This Privacy Policy
+        explains
+        what
+        information we collect, how we use it, and your rights.</p><br>
 
-          <h2><strong>Information We Collect</strong></h2>
-          <p>We may collect personal information you provide (such as your name or email if you contact us) and
-            non-personal
-            data such as browser type, device, and usage patterns through cookies.</p><br>
+      <h2><strong>Information We Collect</strong></h2>
+      <p>We may collect personal information you provide (such as your name or email if you contact us) and
+        non-personal
+        data such as browser type, device, and usage patterns through cookies.</p><br>
 
-          <h2><strong>Use of Cookies</strong> </h2>
-          <p>Buddy Matcher uses cookies to improve your experience, analyse traffic, and show personalised ads.
-            Third-party
-            vendors, including Google, use cookies to serve ads based on your previous visits to this site or other
-            websites.</p>
+      <h2><strong>Use of Cookies</strong> </h2>
+      <p>Buddy Matcher uses cookies to improve your experience, analyse traffic, and show personalised ads.
+        Third-party
+        vendors, including Google, use cookies to serve ads based on your previous visits to this site or other
+        websites.</p>
 
-          <p>Google’s use of advertising cookies enables it and its partners to serve ads to you based on your visit
-            to
-            this
-            site and/or other sites on the Internet. You can opt out of personalised advertising by visiting <a
-              href="https://www.google.com/settings/ads">Google Ads Settings</a>.</p><br>
+      <p>Google’s use of advertising cookies enables it and its partners to serve ads to you based on your visit
+        to
+        this
+        site and/or other sites on the Internet. You can opt out of personalised advertising by visiting <a
+          href="https://www.google.com/settings/ads">Google Ads Settings</a>.</p><br>
 
-          <h2><strong>We Use Your Information</strong></h2>
+      <h2><strong>We Use Your Information</strong></h2>
 
-          <p>To provide and improve our services.
-            To display relevant advertising.
-            To communicate with you if you reach out via our contact form.</p>
-          <br>
+      <p>To provide and improve our services.
+        To display relevant advertising.
+        To communicate with you if you reach out via our contact form.</p>
+      <br>
 
-          <h2><strong>Choices</strong></h2>
-          <p>You can disable cookies in your browser settings. Please note that some features of our site may not
-            function
-            properly if cookies are disabled.</p><br>
+      <h2><strong>Choices</strong></h2>
+      <p>You can disable cookies in your browser settings. Please note that some features of our site may not
+        function
+        properly if cookies are disabled.</p><br>
 
-          <h2><strong>Changes</strong></h2>
-          <p>We may update this Privacy Policy from time to time. The latest version will always be available on
-            this
-            page.
-          </p><br>
+      <h2><strong>Changes</strong></h2>
+      <p>We may update this Privacy Policy from time to time. The latest version will always be available on
+        this
+        page.
+      </p><br>
 
-          <h2><strong>Contact Us</strong></h2>
-          <p>If you have any questions about this Privacy Policy, please <a href="mailto:erkan.said22@gmail.com">email
-              me</a>.</p><br>
+      <h2><strong>Contact Us</strong></h2>
+      <p>If you have any questions about this Privacy Policy, please <a href="mailto:erkan.said22@gmail.com">email
+          me</a>.</p><br>
 
 
 
-          <h2><strong>Privacy & Disclaimer</strong></h2>
-          <p>Buddy Matcher does not collect or store any personal information. All names entered are processed
-            locally
-            in
-            your
-            browser and are never sent to our servers. We use Google AdSense to show ads and help keep this tool
-            free.
+      <h2><strong>Privacy & Disclaimer</strong></h2>
+      <p>Buddy Matcher does not collect or store any personal information. All names entered are processed
+        locally
+        in
+        your
+        browser and are never sent to our servers. We use Google AdSense to show ads and help keep this tool
+        free.
 
-            By using this site, you agree that any generated matches are for fun and practical use only. We make no
-            guarantees about outcomes or randomisation fairness.</p>
-        </div>
+        By using this site, you agree that any generated matches are for fun and practical use only. We make no
+        guarantees about outcomes or randomisation fairness.</p>
+    </div>
     </div>
     </div>
   </section>
@@ -811,6 +821,7 @@
       </div>
     </div>
   </section>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="buddy.js"></script>

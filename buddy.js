@@ -94,6 +94,8 @@ addButton.addEventListener('click', (event) => {
             }, 50);
 
             addedNames.push(employeeName);
+                    nameInput.value = ""; // clear input
+
         }
     });
 
@@ -192,7 +194,7 @@ const generateAllMatches = () => {
         groupDiv.classList.add('group-card');
         // Pick a color gradient for this group
         groupDiv.style.background = '#fff';  // card background neutral
-        groupDiv.style.border = `2px solid ${colors[groupNumber % colors.length].split(',')[0].replace('linear-gradient(135deg,','')}`
+        groupDiv.style.border = `2px solid ${colors[groupNumber % colors.length].split(',')[0].replace('linear-gradient(135deg,', '')}`
 
         const label = document.createElement('div');
         label.classList.add('group-label');
@@ -202,12 +204,14 @@ const generateAllMatches = () => {
             const pill = document.createElement('span');
             pill.classList.add('name-pill');
             pill.textContent = name;
-            pill.style.background = colors[Math.floor(Math.random()*colors.length)];
+            pill.style.background = colors[Math.floor(Math.random() * colors.length)];
             groupDiv.appendChild(pill);
         });
 
         matchesDiv.appendChild(groupDiv);
         groupNumber++;
+        nameInput.value = ""; // clear input
+
     }
 };
 
