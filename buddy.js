@@ -66,7 +66,7 @@ addButton.addEventListener('click', (event) => {
     }
 
     // Split input on any whitespace (spaces, tabs, or newlines)
-    const namesArray = rawInput.split(/\s+/);
+const namesArray = rawInput.split(/\r?\n/).map(name => name.trim()).filter(name => name);
 
     let addedNames = [];
 
