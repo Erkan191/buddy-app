@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>Buddy Matcher Pro</title>
+
+<link rel="stylesheet" href="buddy.css" />
+</head>
+
+<body class="pro-body">
+
+<header class="topbar">
+  <div class="logo">Buddy Matcher <span>Pro</span></div>
+  <a href="index.html" class="btn btn-light">Free version</a>
+</header>
+
+<main class="container">
+
+<h1>Buddy Matcher Pro</h1>
+<p class="subtitle">
+Save lists, avoid repeat pairings, export results and present groups cleanly.
+</p>
+
+<div class="pro-grid">
+
+<div class="card">
+<h3>Saved Lists</h3>
+<input id="listName" placeholder="List name (e.g. Year 5 Maths)" />
+<textarea id="namesInput" placeholder="Paste names here..."></textarea>
+
+<button id="saveListBtn" class="btn btn-success">Save List</button>
+
+<div id="savedLists"></div>
+</div>
+
+<div class="card">
+<h3>Generate Groups</h3>
+
+<label>Group size</label>
+<select id="groupSize">
+<option value="2">Pairs</option>
+<option value="3">Groups of 3</option>
+<option value="4">Groups of 4</option>
+<option value="5">Groups of 5</option>
+</select>
+
+<label class="checkbox">
+<input type="checkbox" id="avoidRepeats" checked />
+Avoid repeat pairings
+</label>
+
+<button id="generateBtn" class="btn btn-primary">
+Generate Groups
+</button>
+
+<div class="actions">
+<button id="copyBtn" class="btn btn-light">Copy</button>
+<button id="csvBtn" class="btn btn-light">Export CSV</button>
+<button id="printBtn" class="btn btn-light">Presentation / Print</button>
+</div>
+
+<div id="results"></div>
+</div>
+
+</div>
+
+</main>
+
+<script src="pro.js"></script>
+
+</body>
+</html>
