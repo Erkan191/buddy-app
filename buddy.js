@@ -1,286 +1,507 @@
-// --- DOM ELEMENTS ---
-const addButton = document.getElementById('add-button');
-const deleteButton = document.getElementById('delete-button');
-const nameInput = document.getElementById('name-input');
-const showNamesButton = document.getElementById('show-names'); // optional button
-const buttonGenerator = document.getElementById('buttonGenerator');
-const namesListDiv = document.getElementById('names-list'); // shows newly added names
-const matchesDiv = document.getElementById('matches'); // shows pairings/trios
-const resetButton = document.getElementById('reset');
-const deleteAll = document.getElementById('delete-all');
-const dialogBox = document.getElementById('confirm-deleteAll-dialog');
-const deleteAllModalBtn = document.getElementById('yesDelete-Modal-btn');
-const groupSizeSelector = document.getElementById('group-size');
-const groupPreviewDiv = document.getElementById('group-preview');
-
-
-// --- DATA ---
-let employeeList = JSON.parse(localStorage.getItem('addedEmployeeList')) || {};
-let sessionPool = []; // temporary pool for current matching session
-
-// --- UTILITY FUNCTIONS ---
-const renderNamesList = () => {
-    namesListDiv.innerHTML = '';
-    Object.values(employeeList).forEach(e => {
-        const div = document.createElement('div');
-        div.textContent = e.employee;
-        div.style.fontSize = "24px";
-        div.classList.add("text-center");
-        div.style.opacity = 0; // fade-in
-        namesListDiv.appendChild(div);
-        setTimeout(() => {
-            div.style.transition = "opacity 0.8s";
-            div.style.opacity = 1;
-        }, 50);
-    });
+const STORAGE_KEYS = {
+  names: "buddyMatcher_names",
+  savedLists: "buddyMatcher_saved_lists",
+  lastResult: "buddyMatcher_last_result"
 };
 
-const fadeOutNamesList = () => {
-    if (namesListDiv.children.length === 0) return;
-    namesListDiv.style.transition = "opacity 0.8s";
-    namesListDiv.style.opacity = 0;
+const gradients = [
+  "linear-gradient(135deg, #38bdf8, #3b82f6)",
+  "linear-gradient(135deg, #34d399, #10b981)",
+  "linear-gradient(135deg, #f59e0b, #f97316)",
+  "linear-gradient(135deg, #f472b6, #ec4899)",
+  "linear-gradient(135deg, #a78bfa, #8b5cf6)",
+  "linear-gradient(135deg, #60a5fa, #2563eb)"
+];
+
+const addButton = document.getElementById("add-button");
+const deleteButton = document.getElementById("delete-button");
+const nameInput = document.getElementById("name-input");
+const showNamesButton = document.getElementById("show-names");
+const buttonGenerator = document.getElementById("buttonGenerator");
+const namesListDiv = document.getElementById("names-list");
+const matchesDiv = document.getElementById("matches");
+const emptyState = document.getElementById("empty-state");
+const resetButton = document.getElementById("reset");
+const deleteAllButton = document.getElementById("delete-all");
+const dialogBox = document.getElementById("confirm-deleteAll-dialog");
+const deleteAllModalBtn = document.getElementById("yesDelete-Modal-btn");
+const groupSizeSelector = document.getElementById("group-size");
+const groupPreviewDiv = document.getElementById("group-preview");
+const copyResultsButton = document.getElementById("copy-results");
+const downloadResultsButton = document.getElementById("download-results");
+const shareToolButton = document.getElementById("share-tool");
+const saveListButton = document.getElementById("save-list");
+const loadListButton = document.getElementById("load-list");
+const deleteListButton = document.getElementById("delete-list");
+const savedListsSelect = document.getElementById("saved-lists");
+const avoidRepeatsCheckbox = document.getElementById("avoid-repeats");
+const savedStatus = document.getElementById("saved-status");
+
+let names = JSON.parse(localStorage.getItem(STORAGE_KEYS.names)) || [];
+let savedLists = JSON.parse(localStorage.getItem(STORAGE_KEYS.savedLists)) || {};
+let lastResult = JSON.parse(localStorage.getItem(STORAGE_KEYS.lastResult)) || [];
+
+function persistNames() {
+  localStorage.setItem(STORAGE_KEYS.names, JSON.stringify(names));
+  updateSavedStatus();
+}
+
+function persistSavedLists() {
+  localStorage.setItem(STORAGE_KEYS.savedLists, JSON.stringify(savedLists));
+}
+
+function persistLastResult() {
+  localStorage.setItem(STORAGE_KEYS.lastResult, JSON.stringify(lastResult));
+}
+
+function updateSavedStatus() {
+  savedStatus.textContent =
+    names.length > 0
+      ? `${names.length} name${names.length === 1 ? "" : "s"} saved locally in your browser`
+      : "Saved locally in your browser";
+}
+
+function normaliseInputToArray(raw) {
+  return raw
+    .split(/\r?\n|,/)
+    .map((name) => name.trim())
+    .filter(Boolean);
+}
+
+function dedupeNames(arr) {
+  const seen = new Set();
+  const result = [];
+
+  for (const name of arr) {
+    const lower = name.toLowerCase();
+    if (!seen.has(lower)) {
+      seen.add(lower);
+      result.push(name);
+    }
+  }
+
+  return result;
+}
+
+function renderNamesList() {
+  namesListDiv.innerHTML = "";
+
+  if (names.length === 0) {
+    return;
+  }
+
+  names.forEach((name) => {
+    const chip = document.createElement("span");
+    chip.className = "name-chip";
+    chip.textContent = name;
+    namesListDiv.appendChild(chip);
+  });
+}
+
+function updateGroupPreview() {
+  const total = names.length;
+  const groupSize = Math.max(2, parseInt(groupSizeSelector.value, 10) || 2);
+
+  if (total === 0) {
+    groupPreviewDiv.textContent = "Add some names to see group distribution.";
+    return;
+  }
+
+  let remaining = total;
+  const groups = [];
+
+  while (remaining > 0) {
+    let currentGroupSize = groupSize;
+
+    if (remaining <= groupSize) {
+      currentGroupSize = remaining;
+    } else if (remaining - groupSize === 1) {
+      currentGroupSize = groupSize + 1;
+    }
+
+    groups.push(currentGroupSize);
+    remaining -= currentGroupSize;
+  }
+
+  groupPreviewDiv.textContent = `Total names: ${total} → Group sizes: ${groups.join(", ")}`;
+}
+
+function refreshSavedListsDropdown() {
+  const currentValue = savedListsSelect.value;
+  savedListsSelect.innerHTML = '<option value="">Choose a saved list</option>';
+
+  Object.keys(savedLists)
+    .sort((a, b) => a.localeCompare(b))
+    .forEach((listName) => {
+      const option = document.createElement("option");
+      option.value = listName;
+      option.textContent = `${listName} (${savedLists[listName].length})`;
+      savedListsSelect.appendChild(option);
+    });
+
+  if (savedLists[currentValue]) {
+    savedListsSelect.value = currentValue;
+  }
+}
+
+function shuffleArray(arr) {
+  const clone = [...arr];
+  for (let i = clone.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [clone[i], clone[j]] = [clone[j], clone[i]];
+  }
+  return clone;
+}
+
+function buildGroupsFromNames(sourceNames, groupSize) {
+  const working = [...sourceNames];
+  const groups = [];
+
+  while (working.length > 0) {
+    let currentGroupSize = groupSize;
+
+    if (working.length <= groupSize) {
+      currentGroupSize = working.length;
+    } else if (working.length - groupSize === 1) {
+      currentGroupSize = groupSize + 1;
+    }
+
+    groups.push(working.splice(0, currentGroupSize));
+  }
+
+  return groups;
+}
+
+function groupSignature(group) {
+  return [...group].sort((a, b) => a.localeCompare(b)).join("|");
+}
+
+function repeatsLastGrouping(candidateGroups) {
+  if (!Array.isArray(lastResult) || lastResult.length === 0) return false;
+
+  const previous = new Set(lastResult.map(groupSignature));
+  return candidateGroups.some((group) => previous.has(groupSignature(group)));
+}
+
+function generateGroupsWithRetry() {
+  const groupSize = Math.max(2, parseInt(groupSizeSelector.value, 10) || 2);
+  const avoidRepeats = avoidRepeatsCheckbox.checked;
+
+  let bestGroups = buildGroupsFromNames(shuffleArray(names), groupSize);
+
+  if (!avoidRepeats || lastResult.length === 0) {
+    return bestGroups;
+  }
+
+  for (let attempt = 0; attempt < 200; attempt++) {
+    const candidate = buildGroupsFromNames(shuffleArray(names), groupSize);
+    if (!repeatsLastGrouping(candidate)) {
+      return candidate;
+    }
+    bestGroups = candidate;
+  }
+
+  return bestGroups;
+}
+
+function renderGroups(groups) {
+  matchesDiv.innerHTML = "";
+
+  if (!groups.length) {
+    emptyState.style.display = "block";
+    return;
+  }
+
+  emptyState.style.display = "none";
+
+  groups.forEach((group, index) => {
+    const groupDiv = document.createElement("div");
+    groupDiv.className = "group-card";
+
+    const label = document.createElement("div");
+    label.className = "group-label";
+    label.textContent = `Group ${index + 1}`;
+    groupDiv.appendChild(label);
+
+    group.forEach((name, nameIndex) => {
+      const pill = document.createElement("span");
+      pill.className = "name-pill";
+      pill.textContent = name;
+      pill.style.background = gradients[(index + nameIndex) % gradients.length];
+      groupDiv.appendChild(pill);
+    });
+
+    matchesDiv.appendChild(groupDiv);
+  });
+}
+
+function groupsToPlainText(groups) {
+  if (!groups || groups.length === 0) return "";
+
+  return groups
+    .map((group, index) => `Group ${index + 1}: ${group.join(", ")}`)
+    .join("\n");
+}
+
+async function copyResults() {
+  const text = groupsToPlainText(lastResult);
+  if (!text) {
+    alert("Generate some groups first.");
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(text);
+    copyResultsButton.textContent = "Copied";
     setTimeout(() => {
-        namesListDiv.innerHTML = '';
-        namesListDiv.style.opacity = 1;
-    }, 800);
-};
+      copyResultsButton.textContent = "Copy";
+    }, 1200);
+  } catch {
+    alert("Could not copy automatically. Please try again.");
+  }
+}
 
-const initializeSessionPool = () => {
-    sessionPool = Object.entries(employeeList).map(([key, value]) => [key, value]);
-};
+function downloadResults() {
+  const text = groupsToPlainText(lastResult);
+  if (!text) {
+    alert("Generate some groups first.");
+    return;
+  }
 
-const pickRandomFromSession = () => {
-    if (sessionPool.length === 0) return null;
-    const index = Math.floor(Math.random() * sessionPool.length);
-    return sessionPool.splice(index, 1)[0];
-};
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "buddy-matcher-results.txt";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
 
-// --- BUTTON FUNCTIONS ---
-addButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    const rawInput = nameInput.value.trim();
+async function shareTool() {
+  const shareData = {
+    title: "Buddy Matcher",
+    text: "Free random pair generator for names, teams and classrooms.",
+    url: window.location.href.split("#")[0]
+  };
 
-    if (!rawInput) {
-        alert("Please enter a buddy name to add.");
-        return;
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      return;
+    } catch {
+      // fall through to clipboard
     }
+  }
 
-    // Split input on any whitespace (spaces, tabs, or newlines)
-const namesArray = rawInput.split(/\r?\n/).map(name => name.trim()).filter(name => name);
+  try {
+    await navigator.clipboard.writeText(shareData.url);
+    shareToolButton.textContent = "Link copied";
+    setTimeout(() => {
+      shareToolButton.textContent = "Share tool";
+    }, 1200);
+  } catch {
+    alert("Could not share the link.");
+  }
+}
 
-    let addedNames = [];
+function addNamesFromInput() {
+  const rawInput = nameInput.value.trim();
 
-    namesArray.forEach((employeeName) => {
-        // Check for duplicate (case-insensitive)
-        const exists = Object.values(employeeList).some(
-            e => e.employee.toLowerCase() === employeeName.toLowerCase()
-        );
+  if (!rawInput) {
+    alert("Please enter at least one name.");
+    return;
+  }
 
-        if (!exists && employeeName) {
-            const newId = Object.keys(employeeList).length + 1;
-            employeeList[newId] = { employee: employeeName };
-            localStorage.setItem('addedEmployeeList', JSON.stringify(employeeList));
+  const incoming = dedupeNames(normaliseInputToArray(rawInput));
 
-            // Show the newly added buddy immediately
-            const div = document.createElement('div');
-            div.textContent = employeeName;
-            div.style.fontSize = "24px";
-            div.classList.add("text-center");
-            div.style.opacity = 0;
-            namesListDiv.appendChild(div);
-            setTimeout(() => {
-                div.style.transition = "opacity 0.8s";
-                div.style.opacity = 1;
-            }, 50);
+  if (incoming.length === 0) {
+    alert("Please enter at least one valid name.");
+    return;
+  }
 
-            addedNames.push(employeeName);
-                    nameInput.value = ""; // clear input
+  const existingLower = new Set(names.map((name) => name.toLowerCase()));
+  let addedCount = 0;
 
-        }
-    });
-
-    if (addedNames.length === 0) {
-        alert("You've already entered this name!");
+  incoming.forEach((name) => {
+    if (!existingLower.has(name.toLowerCase())) {
+      names.push(name);
+      existingLower.add(name.toLowerCase());
+      addedCount++;
     }
+  });
 
-    nameInput.value = ""; // clear input
+  if (addedCount === 0) {
+    alert("Those names are already in the list.");
+    return;
+  }
+
+  persistNames();
+  renderNamesList();
+  updateGroupPreview();
+  nameInput.value = "";
+}
+
+function deleteOneName() {
+  const rawInput = nameInput.value.trim();
+
+  if (!rawInput) {
+    alert("Type the exact name you want to delete.");
+    return;
+  }
+
+  const index = names.findIndex((name) => name.toLowerCase() === rawInput.toLowerCase());
+
+  if (index === -1) {
+    alert("Name not found.");
+    return;
+  }
+
+  names.splice(index, 1);
+  persistNames();
+  renderNamesList();
+  updateGroupPreview();
+  nameInput.value = "";
+}
+
+function generateAllMatches() {
+  if (names.length < 2) {
+    alert("Add at least two names first.");
+    return;
+  }
+
+  const groups = generateGroupsWithRetry();
+  lastResult = groups;
+  persistLastResult();
+  renderGroups(groups);
+}
+
+function clearResultsOnly() {
+  matchesDiv.innerHTML = "";
+  emptyState.style.display = "block";
+}
+
+function deleteAllNames() {
+  names = [];
+  lastResult = [];
+  localStorage.removeItem(STORAGE_KEYS.names);
+  localStorage.removeItem(STORAGE_KEYS.lastResult);
+  renderNamesList();
+  renderGroups([]);
+  updateGroupPreview();
+  updateSavedStatus();
+  nameInput.value = "";
+}
+
+function saveCurrentList() {
+  if (names.length === 0) {
+    alert("Add some names before saving a list.");
+    return;
+  }
+
+  const listName = window.prompt("Name this list:", "");
+  if (!listName) return;
+
+  const trimmed = listName.trim();
+  if (!trimmed) return;
+
+  savedLists[trimmed] = [...names];
+  persistSavedLists();
+  refreshSavedListsDropdown();
+  savedListsSelect.value = trimmed;
+}
+
+function loadSelectedList() {
+  const selected = savedListsSelect.value;
+  if (!selected || !savedLists[selected]) {
+    alert("Choose a saved list first.");
+    return;
+  }
+
+  names = [...savedLists[selected]];
+  persistNames();
+  renderNamesList();
+  updateGroupPreview();
+  clearResultsOnly();
+}
+
+function deleteSelectedList() {
+  const selected = savedListsSelect.value;
+  if (!selected || !savedLists[selected]) {
+    alert("Choose a saved list first.");
+    return;
+  }
+
+  const confirmed = window.confirm(`Delete saved list "${selected}"?`);
+  if (!confirmed) return;
+
+  delete savedLists[selected];
+  persistSavedLists();
+  refreshSavedListsDropdown();
+}
+
+function init() {
+  renderNamesList();
+  renderGroups([]);
+  updateGroupPreview();
+  refreshSavedListsDropdown();
+  updateSavedStatus();
+}
+
+addButton.addEventListener("click", addNamesFromInput);
+deleteButton.addEventListener("click", deleteOneName);
+showNamesButton.addEventListener("click", renderNamesList);
+buttonGenerator.addEventListener("click", generateAllMatches);
+resetButton.addEventListener("click", clearResultsOnly);
+
+deleteAllButton.addEventListener("click", () => {
+  dialogBox.showModal();
 });
 
-
-deleteButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    const inputName = nameInput.value.trim();
-    if (!inputName) {
-        alert("Please enter a buddy name to delete.");
-        return;
-    }
-
-    // Find the buddy in the employeeList
-    const entry = Object.entries(employeeList).find(
-        ([key, value]) => value.employee.toLowerCase() === inputName.toLowerCase()
-    );
-
-    if (entry) {
-        const [id] = entry;
-        delete employeeList[id];
-
-        // Update localStorage
-        localStorage.setItem('addedEmployeeList', JSON.stringify(employeeList));
-
-        // Clear UI
-        renderNamesList();       // refresh the names list
-        matchesDiv.innerHTML = ''; // remove any current matches
-
-    } else {
-        alert("Buddy not found");
-    }
-
-    nameInput.value = "";
+deleteAllModalBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  deleteAllNames();
+  dialogBox.close();
 });
 
+groupSizeSelector.addEventListener("change", updateGroupPreview);
+copyResultsButton.addEventListener("click", copyResults);
+downloadResultsButton.addEventListener("click", downloadResults);
+shareToolButton.addEventListener("click", shareTool);
+saveListButton.addEventListener("click", saveCurrentList);
+loadListButton.addEventListener("click", loadSelectedList);
+deleteListButton.addEventListener("click", deleteSelectedList);
 
-showNamesButton.addEventListener('click', () => {
-    if (Object.keys(employeeList).length === 0) {
-        alert("No buddies available. Please add some!");
-        return;
+nameInput.addEventListener("input", () => {
+  const tempNames = dedupeNames(normaliseInputToArray(nameInput.value.trim()));
+  if (tempNames.length === 0) {
+    updateGroupPreview();
+    return;
+  }
+
+  const groupSize = Math.max(2, parseInt(groupSizeSelector.value, 10) || 2);
+  let remaining = tempNames.length;
+  const groups = [];
+
+  while (remaining > 0) {
+    let currentGroupSize = groupSize;
+    if (remaining <= groupSize) {
+      currentGroupSize = remaining;
+    } else if (remaining - groupSize === 1) {
+      currentGroupSize = groupSize + 1;
     }
-    renderNamesList();
+    groups.push(currentGroupSize);
+    remaining -= currentGroupSize;
+  }
+
+  groupPreviewDiv.textContent = `Pasted names: ${tempNames.length} → Group sizes: ${groups.join(", ")}`;
 });
 
-// --- MATCH GENERATION ---
-const generateAllMatches = () => {
-    if (Object.keys(employeeList).length === 0) {
-        alert("You need to add some names first!");
-        return;
-    }
-
-    if (namesListDiv.children.length > 0) fadeOutNamesList();
-    matchesDiv.innerHTML = '';
-    initializeSessionPool();
-
-    if (sessionPool.length === 0) return;
-
-    let groupSize = parseInt(groupSizeSelector.value);
-    if (groupSize < 2) groupSize = 2;
-    if (groupSize > 10) groupSize = 10;
-
-    const totalNames = sessionPool.length;
-    let groupNumber = 1;
-
-    const colors = [
-        'linear-gradient(135deg,#ff6b6b,#f06595)',
-        'linear-gradient(135deg,#339af0,#22b8cf)',
-        'linear-gradient(135deg,#51cf66,#94d82d)',
-        'linear-gradient(135deg,#fcc419,#ff922b)',
-        'linear-gradient(135deg,#845ef7,#5c7cfa)'
-    ];
-
-    while (sessionPool.length > 0) {
-        let currentGroupSize = groupSize;
-
-        if (sessionPool.length <= groupSize) {
-            currentGroupSize = sessionPool.length;
-        } else if (sessionPool.length - groupSize === 1) {
-            currentGroupSize = groupSize + 1;
-        }
-
-        const group = [];
-        for (let i = 0; i < currentGroupSize; i++) {
-            const buddy = pickRandomFromSession();
-            if (buddy) group.push(buddy[1].employee);
-        }
-
-        const groupDiv = document.createElement('div');
-        groupDiv.classList.add('group-card');
-        // Pick a color gradient for this group
-        groupDiv.style.background = '#fff';  // card background neutral
-        groupDiv.style.border = `2px solid ${colors[groupNumber % colors.length].split(',')[0].replace('linear-gradient(135deg,', '')}`
-
-        const label = document.createElement('div');
-        label.classList.add('group-label');
-        groupDiv.appendChild(label);
-
-        group.forEach(name => {
-            const pill = document.createElement('span');
-            pill.classList.add('name-pill');
-            pill.textContent = name;
-            pill.style.background = colors[Math.floor(Math.random() * colors.length)];
-            groupDiv.appendChild(pill);
-        });
-
-        matchesDiv.appendChild(groupDiv);
-        groupNumber++;
-        nameInput.value = ""; // clear input
-
-    }
-};
-
-
-// Helper: generate a random pastel color
-const randomPastelColor = () => {
-    const r = Math.floor((Math.random() * 127) + 127);
-    const g = Math.floor((Math.random() * 127) + 127);
-    const b = Math.floor((Math.random() * 127) + 127);
-    return `rgb(${r},${g},${b})`;
-};
-
-
-const updateGroupPreview = () => {
-    const groupSize = parseInt(groupSizeSelector.value) || 2;
-    const totalNames = Object.keys(employeeList).length;
-
-    if (totalNames === 0) {
-        groupPreviewDiv.textContent = "Add some buddies to see group distribution.";
-        return;
-    }
-
-    let remaining = totalNames;
-    let groups = [];
-
-    while (remaining > 0) {
-        let currentGroupSize = groupSize;
-
-        // Avoid last group having only 1
-        if (remaining <= groupSize) {
-            currentGroupSize = remaining;
-        } else {
-            if (remaining - groupSize === 1) currentGroupSize = groupSize + 1;
-        }
-
-        groups.push(currentGroupSize);
-        remaining -= currentGroupSize;
-    }
-
-    groupPreviewDiv.textContent = `Total buddies: ${totalNames} → Group sizes: ${groups.join(", ")}`;
-};
-
-
-
-// --- BUTTON EVENTS ---
-buttonGenerator.addEventListener('click', generateAllMatches);
-
-resetButton.addEventListener('click', () => {
-    matchesDiv.innerHTML = ''; // only clear matches
-    namesListDiv.innerHTML = ''; //clears names
+nameInput.addEventListener("keydown", (event) => {
+  if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+    addNamesFromInput();
+  }
 });
 
-deleteAll.addEventListener('click', () => {
-    dialogBox.showModal();
-});
-
-deleteAllModalBtn.addEventListener('click', () => {
-    employeeList = {};
-    sessionPool = [];
-    localStorage.removeItem('addedEmployeeList');
-    namesListDiv.innerHTML = '';
-    matchesDiv.innerHTML = '';
-
-    // Close the modal after deletion
-    dialogBox.close();
-});
-
-nameInput.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-        addButton.click()
-    }
-});
+init();

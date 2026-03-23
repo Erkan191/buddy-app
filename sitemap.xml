@@ -1,17 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://buddymatcher.co.uk/</loc>
   </url>
   <url>
-    <loc>https://buddymatcher.co.uk/about</loc>
+    <loc>https://buddymatcher.co.uk/contact.html</loc>
   </url>
   <url>
-    <loc>https://buddymatcher.co.uk/privacy</loc>
+    <loc>https://buddymatcher.co.uk/privacy.html</loc>
   </url>
   <url>
-    <loc>https://buddymatcher.co.uk/terms</loc>
-  </url>
-  <url>
-    <loc>https://buddymatcher.co.uk/contact</loc>
+    <loc>https://buddymatcher.co.uk/terms.html</loc>
   </url>
 </urlset>
